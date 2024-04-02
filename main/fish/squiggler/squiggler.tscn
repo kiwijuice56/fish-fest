@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ipuwdhucawjo"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_fowsh"]
+[ext_resource type="Script" path="res://main/fish/squiggler/squiggler.gd" id="2_1wj3l"]
+[ext_resource type="Texture2D" uid="uid://c57538ckqlr0d" path="res://main/item/egg/egg.png" id="3_8c84i"]
+[ext_resource type="PackedScene" uid="uid://thiyub43pqal" path="res://main/fish/squiggler/tentacle.tscn" id="4_40oiw"]
+
+[node name="Squiggler" instance=ExtResource("1_fowsh")]
+script = ExtResource("2_1wj3l")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_8c84i")
+offset = Vector2(0, 0)
+
+[node name="Tentacles" type="Node2D" parent="." index="5"]
+unique_name_in_owner = true
+
+[node name="Tentacle" parent="Tentacles" index="0" instance=ExtResource("4_40oiw")]
+controller = NodePath("../..")
+
+[node name="Tentacle2" parent="Tentacles" index="1" instance=ExtResource("4_40oiw")]
+rotation = -1.5708
+controller = NodePath("../..")
+
+[node name="Tentacle3" parent="Tentacles" index="2" instance=ExtResource("4_40oiw")]
+rotation = 3.14159
+controller = NodePath("../..")
+
+[node name="Tentacle4" parent="Tentacles" index="3" instance=ExtResource("4_40oiw")]
+rotation = 1.5708
+controller = NodePath("../..")

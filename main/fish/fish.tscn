@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyych6mhtvl5"]
+[gd_scene load_steps=7 format=3 uid="uid://dyych6mhtvl5"]
 
 [ext_resource type="Script" path="res://main/fish/fish.gd" id="1_vgmaj"]
-[ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="2_eodw3"]
 [ext_resource type="Texture2D" uid="uid://cchb8okmvb8pw" path="res://main/fish/bubble.png" id="3_b7rgw"]
 
 [sub_resource type="Curve" id="Curve_ogqke"]
@@ -15,44 +14,6 @@ radius = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7or44"]
 radius = 16.0
-
-[sub_resource type="Animation" id="Animation_ccgc3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_o0m70"]
-resource_name = "basic_swim"
-length = 0.4
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdc8n"]
-_data = {
-"RESET": SubResource("Animation_ccgc3"),
-"basic_swim": SubResource("Animation_o0m70")
-}
 
 [node name="Fish" type="CharacterBody2D"]
 collision_layer = 2
@@ -71,9 +32,7 @@ scale_amount_curve = SubResource("Curve_ogqke")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_eodw3")
-offset = Vector2(-4.1, 0)
-hframes = 5
+offset = Vector2(3.93, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mqdea")
@@ -96,11 +55,3 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
 shape = SubResource("CircleShape2D_7or44")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_bdc8n")
-}
-autoplay = "basic_swim"
-speed_scale = 3.0
