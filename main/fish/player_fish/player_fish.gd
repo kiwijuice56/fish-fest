@@ -6,7 +6,8 @@ extends Fish
 @export var max_radius: float = 128.0
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept", false):
+	if event.is_action_pressed("ui_accept", false) and Stats.energy >= 10:
+		Stats.energy -= 10
 		spawn_egg()
 
 func _physics_process(delta: float) -> void:

@@ -6,12 +6,16 @@ extends Item
 
 func _ready() -> void:
 	grow()
+	%Sprite2D.material = %Sprite2D.material.duplicate()
 
 func grow() -> void:
 	%AnimationPlayer.speed_scale = 1.0 / hatch_time
 	%AnimationPlayer.play("grow")
 	await %AnimationPlayer.animation_finished
+	%AnimationPlayer.speed_scale = 1.0 
+	%AnimationPlayer.play("hatch")
 	spawn_boid()
+	await %AnimationPlayer.animation_finished
 	queue_free()
 
 func spawn_boid() -> void:
