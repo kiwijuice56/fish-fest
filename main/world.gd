@@ -23,6 +23,9 @@ func _process(delta: float) -> void:
 		update_chunks()
 
 func update_chunks() -> void:
+	var tween: Tween = get_tree().create_tween()
+	
+	
 	var last: Array = get_children()
 	var remain: Array = []
 	for i in range(-1, 2):
@@ -37,6 +40,7 @@ func update_chunks() -> void:
 	for child in get_children():
 		if not child in remain:
 			remove_child(child)
+	tween.tween_property(%Background, "color", chunk_storage[player_chunk].bg_color, 1.0)
 
 func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	var noise_coord: Vector2 = chunk_pos

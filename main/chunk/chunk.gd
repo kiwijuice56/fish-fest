@@ -1,6 +1,7 @@
 class_name Chunk
 extends Node2D
 
+@export var bg_color: Color
 @export var algae_scene: PackedScene
 @export var kelp_scene: PackedScene
 @export var squiggler_chance: float = 0.0
