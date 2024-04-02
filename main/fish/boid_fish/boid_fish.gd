@@ -37,8 +37,11 @@ func _physics_process(delta: float) -> void:
 		velocity += (avg_position - global_position) * cohesion * delta
 	
 	if commander:
-		velocity += (commander.global_position - global_position) * player_follow * delta
-		velocity += commander.velocity * player_alignment * delta
+		var player_mult: float = 1.0
+		if Input.is_action_pressed("mouse_left"):
+			player_mult = 12.0
+		velocity += (commander.global_position - global_position) * player_follow * player_mult * delta
+		velocity += commander.velocity * player_alignment * player_mult * delta
 	
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed

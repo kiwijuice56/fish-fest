@@ -8,7 +8,10 @@ func collect(collector: Fish) -> void:
 	if collected:
 		return
 	collected = true
-	Stats.energy += 2000
+	if collector is BoidFish:
+		Stats.energy += 1
+	if collector is PlayerFish:
+		Stats.energy += 3
 	$AnimationPlayer.play("eat")
 	await $AnimationPlayer.animation_finished
 	queue_free()
