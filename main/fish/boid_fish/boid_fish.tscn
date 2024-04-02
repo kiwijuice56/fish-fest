@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjtd6lb6vq13y"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_qb7eh"]
+[ext_resource type="Script" path="res://main/fish/boid_fish/boid_fish.gd" id="2_xpvhy"]
+
+[sub_resource type="Gradient" id="Gradient_w1xur"]
+colors = PackedColorArray(0.26174, 0.1656, 0.69, 1, 0.788235, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ents"]
+gradient = SubResource("Gradient_w1xur")
+
+[node name="BoidFish" instance=ExtResource("1_qb7eh")]
+script = ExtResource("2_xpvhy")
+color_range = SubResource("GradientTexture1D_6ents")
+max_speed = 320.0
+cohesion = 2.0
+separation = 4.0
+alignment = 0.5
+player_follow = 1.2
+player_alignment = 0.5

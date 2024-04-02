@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgsonuus1one7"]
+
+[ext_resource type="PackedScene" uid="uid://ca12mpsenr5ka" path="res://main/item/item.tscn" id="1_7dgcc"]
+[ext_resource type="Script" path="res://main/item/algae/algae.gd" id="2_745cb"]
+[ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="2_hf1jq"]
+
+[node name="Algae" instance=ExtResource("1_7dgcc")]
+script = ExtResource("2_745cb")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_hf1jq")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6xq677b7i2yh"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_jqmvt"]
+[ext_resource type="Script" path="res://main/fish/player_fish/player_fish.gd" id="2_yjn0a"]
+[ext_resource type="PackedScene" uid="uid://cjtd6lb6vq13y" path="res://main/fish/boid_fish/boid_fish.tscn" id="3_ap5a3"]
+
+[node name="PlayerFish" instance=ExtResource("1_jqmvt")]
+script = ExtResource("2_yjn0a")
+boid_scene = ExtResource("3_ap5a3")
+max_speed = 280.0
+max_radius = 128.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.8, 0.8)
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]

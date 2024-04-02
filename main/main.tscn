@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk2jougfjef45"]
+
+[ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
+[ext_resource type="Texture2D" uid="uid://dlx2xiuysbpwb" path="res://icon.svg" id="2_eqw2v"]
+[ext_resource type="Script" path="res://main/world.gd" id="3_a701s"]
+[ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="3_lx8mu"]
+
+[node name="Main" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_eqw2v")
+
+[node name="PlayerFish" parent="." instance=ExtResource("1_oks1y")]
+
+[node name="World" type="Node" parent="."]
+script = ExtResource("3_a701s")
+chunk_scene = ExtResource("3_lx8mu")

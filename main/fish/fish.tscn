@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyych6mhtvl5"]
+
+[ext_resource type="Script" path="res://main/fish/fish.gd" id="1_vgmaj"]
+[ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="2_eodw3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqdea"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5b57"]
+radius = 64.0
+
+[sub_resource type="Animation" id="Animation_o0m70"]
+resource_name = "basic_swim"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_ccgc3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdc8n"]
+_data = {
+"RESET": SubResource("Animation_ccgc3"),
+"basic_swim": SubResource("Animation_o0m70")
+}
+
+[node name="Fish" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_vgmaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_eodw3")
+offset = Vector2(-4.1, 0)
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mqdea")
+
+[node name="VisionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
+shape = SubResource("CircleShape2D_k5b57")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_bdc8n")
+}
+autoplay = "basic_swim"
+speed_scale = 3.0
