@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="3_8yl7t"]
 
 [sub_resource type="Gradient" id="Gradient_w1xur"]
-colors = PackedColorArray(0.26174, 0.1656, 0.69, 1, 0.788235, 1, 1, 1)
+colors = PackedColorArray(0.455583, 0.385, 0.77, 1, 0.88, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6ents"]
 gradient = SubResource("Gradient_w1xur")
@@ -51,7 +51,7 @@ _data = {
 [node name="BoidFish" instance=ExtResource("1_qb7eh")]
 script = ExtResource("2_xpvhy")
 color_range = SubResource("GradientTexture1D_6ents")
-max_speed = 320.0
+max_speed = 260.0
 cohesion = 2.0
 separation = 4.0
 alignment = 0.5

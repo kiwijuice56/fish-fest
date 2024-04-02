@@ -5,3 +5,4 @@
 
 [node name="Plain" instance=ExtResource("1_3clp4")]
 script = ExtResource("2_u8lpd")
+squiggler_chance = 0.15

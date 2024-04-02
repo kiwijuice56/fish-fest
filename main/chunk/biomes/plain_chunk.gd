@@ -3,4 +3,4 @@ extends Chunk
 
 func initialize() -> void:
 	super.initialize()
-	generate_algae(12, 64)
+	generate_algae(12, 48)

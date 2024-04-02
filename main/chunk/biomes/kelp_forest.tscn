@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2klanuia8oej"]
+
+[ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="1_pq5g4"]
+[ext_resource type="Script" path="res://main/chunk/biomes/kelp_forest.gd" id="2_ef8h7"]
+
+[node name="KelpForest" instance=ExtResource("1_pq5g4")]
+script = ExtResource("2_ef8h7")

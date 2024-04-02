@@ -1,11 +1,19 @@
 class_name World
 extends Node
 
-@export var chunk_scene: PackedScene
+@export var chunk_scenes: Array[PackedScene]
+@export var chunk_prop: Array[float]
+@export var squiggler_scene: PackedScene
+
 var chunk_storage: Dictionary
 var player_chunk: Vector2 = Vector2(0, 0)
+var noise: FastNoiseLite
+var current_squiggler: Squiggler
 
 func _ready() -> void:
+	randomize()
+	noise = FastNoiseLite.new()
+	noise.frequency = 0.2
 	update_chunks()
 
 func _process(delta: float) -> void:
@@ -15,20 +23,34 @@ func _process(delta: float) -> void:
 		update_chunks()
 
 func update_chunks() -> void:
-	for child in get_children():
-		remove_child(child)
+	var last: Array = get_children()
+	var remain: Array = []
 	for i in range(-1, 2):
 		for j in range(-1, 2):
 			var offset: Vector2 = Vector2(i, j)
 			var chunk_pos: Vector2 = player_chunk + offset
 			if not chunk_pos in chunk_storage:
 				chunk_storage[chunk_pos] = generate_chunk(chunk_pos)
-			else:
+			elif not chunk_storage[chunk_pos] in last:
 				add_child(chunk_storage[chunk_pos])
+			remain.append(chunk_storage[chunk_pos])
+	for child in get_children():
+		if not child in remain:
+			remove_child(child)
 
 func generate_chunk(chunk_pos: Vector2) -> Chunk:
-	var new_chunk: Chunk = chunk_scene.instantiate()
+	var noise_coord: Vector2 = chunk_pos
+	var val: float = (noise.get_noise_2d(noise_coord.x, noise_coord.y) + 1.0) / 2.0
+	var i: int = 0
+	while i < len(chunk_prop) and val > chunk_prop[i]:
+		i += 1
+	
+	var new_chunk: Chunk = chunk_scenes[i].instantiate()
 	add_child(new_chunk)
 	new_chunk.initialize()
 	new_chunk.global_position = Chunk.SIZE * chunk_pos
+	if randf() < new_chunk.squiggler_chance and not is_instance_valid(current_squiggler):
+		current_squiggler = squiggler_scene.instantiate()
+		get_parent().add_child.call_deferred(current_squiggler)
+		current_squiggler.global_position = chunk_pos * Chunk.SIZE + Chunk.SIZE * 0.5
 	return new_chunk

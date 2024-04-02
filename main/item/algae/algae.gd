@@ -1,8 +1,10 @@
 class_name Algae
 extends Item
 
+@export var color: GradientTexture1D
+
 func _ready() -> void:
-	modulate = Color.from_hsv(randf(), 0.8, 0.5)
+	modulate = color.gradient.sample(randf())
 
 func collect(collector: Fish) -> void:
 	if collected:

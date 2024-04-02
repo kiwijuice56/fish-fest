@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgsonuus1one7"]
+[gd_scene load_steps=18 format=3 uid="uid://dgsonuus1one7"]
 
 [ext_resource type="PackedScene" uid="uid://ca12mpsenr5ka" path="res://main/item/item.tscn" id="1_7dgcc"]
 [ext_resource type="Script" path="res://main/item/algae/algae.gd" id="2_745cb"]
@@ -7,6 +7,13 @@
 [ext_resource type="AudioStream" uid="uid://5eapufx1g3v" path="res://main/sounds/bite2.ogg" id="5_1nwpw"]
 [ext_resource type="AudioStream" uid="uid://bfkajf1d5qy5f" path="res://main/sounds/bite3.ogg" id="6_ysuae"]
 [ext_resource type="AudioStream" uid="uid://bjfctc6kumfhy" path="res://main/sounds/bite4.ogg" id="7_ngqc7"]
+
+[sub_resource type="Gradient" id="Gradient_g50d2"]
+offsets = PackedFloat32Array(0, 0.991071)
+colors = PackedColorArray(0.1776, 0.37, 0.1295, 1, 0.47451, 0.478431, 0.25098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ttu6x"]
+gradient = SubResource("Gradient_g50d2")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4fmw"]
 radius = 8.0
@@ -146,6 +153,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Algae" instance=ExtResource("1_7dgcc")]
 script = ExtResource("2_745cb")
+color = SubResource("GradientTexture1D_ttu6x")
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.6, 0.6)

@@ -8,8 +8,8 @@ extends Fish
 var locked: bool = false
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("mouse_right", false) and Stats.energy >= 1:
-		Stats.energy -= 1
+	if event.is_action_pressed("mouse_right", false) and Stats.energy >= 50:
+		Stats.energy -= 50
 		spawn_egg()
 	if event.is_action_pressed("ui_cancel"):
 		locked = not locked
@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	
 	%Sprite2D.rotation = Vector2(1, 0).angle_to(dir)
 	%AnimationPlayer.speed_scale = speed / max_speed * 3.0
-	%WindPlayer.volume_db = -80 + speed / max_speed * 48
+	%WindPlayer.volume_db = -80 + speed / max_speed * 38
 	
 	if not locked:
 		move_and_slide()

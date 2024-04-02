@@ -173,7 +173,7 @@ stream_0/weight = 1.0
 [node name="Egg" instance=ExtResource("1_326a0")]
 script = ExtResource("2_rjy7u")
 boid_scene = ExtResource("3_aghk6")
-hatch_time = 1.0
+hatch_time = 12.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_6hoxp")
