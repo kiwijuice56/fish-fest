@@ -24,8 +24,6 @@ func _process(delta: float) -> void:
 
 func update_chunks() -> void:
 	var tween: Tween = get_tree().create_tween()
-	
-	
 	var last: Array = get_children()
 	var remain: Array = []
 	for i in range(-1, 2):
@@ -48,6 +46,8 @@ func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	var i: int = 0
 	while i < len(chunk_prop) and val > chunk_prop[i]:
 		i += 1
+	if chunk_pos == Vector2():
+		val = 0
 	
 	var new_chunk: Chunk = chunk_scenes[i].instantiate()
 	add_child(new_chunk)

@@ -24,9 +24,13 @@ func _physics_process(delta: float) -> void:
 
 func _on_prey_entered(body: PhysicsBody2D):
 	var tip: RigidBody2D = joints.get_child(-1) 
-	if body is BoidFish and not %AnimationPlayer.is_playing() and tip.linear_velocity.length() >= 512:
+	if (body is BoidFish or body is PlayerFish) and not %AnimationPlayer.is_playing() and tip.linear_velocity.length() >= 512:
 		%AnimationPlayer.play("kill")
-		body.queue_free()
+		
+		if body is BoidFish:
+			body.queue_free()
+		else:
+			Ref.main.gameover.call_deferred()
 
 func _on_prey_seen(body: PhysicsBody2D):
 	if body is PlayerFish or body is BoidFish:

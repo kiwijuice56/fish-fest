@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		return
 	velocity = (avg_vel / %Tentacles.get_child_count()).normalized() * 32
 	if is_instance_valid(target):
-		velocity += (target.global_position - global_position).normalized() * 128
+		velocity += (target.global_position - global_position).normalized() * 160
 	move_and_slide()
 	
 	if (Ref.player.global_position - global_position).length() > despawn_distance:
