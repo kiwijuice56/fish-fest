@@ -5,10 +5,14 @@ extends Fish
 @export var max_speed: float = 128.0
 @export var max_radius: float = 128.0
 
+var locked: bool = false
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept", false) and Stats.energy >= 10:
 		Stats.energy -= 10
 		spawn_egg()
+	if event.is_action_pressed("ui_cancel"):
+		locked = not locked
 
 func _physics_process(delta: float) -> void:
 	var dir: Vector2 = get_global_mouse_position() - global_position
@@ -19,8 +23,10 @@ func _physics_process(delta: float) -> void:
 	
 	%Sprite2D.rotation = Vector2(1, 0).angle_to(dir)
 	%AnimationPlayer.speed_scale = speed / max_speed * 3.0
+	%WindPlayer.volume_db = -80 + speed / max_speed * 48
 	
-	move_and_slide()
+	if not locked:
+		move_and_slide()
 
 func _item_found(area: Area2D) -> void:
 	if not area is Algae:
@@ -28,6 +34,7 @@ func _item_found(area: Area2D) -> void:
 	area.collect(self)
 
 func spawn_egg() -> void:
+	%PlopPlayer.playing = true
 	var new_egg: Egg = egg_scene.instantiate()
 	get_parent().add_child(new_egg)
 	get_parent().move_child(new_egg, 0)

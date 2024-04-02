@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6xq677b7i2yh"]
+[gd_scene load_steps=7 format=3 uid="uid://c6xq677b7i2yh"]
 
 [ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_jqmvt"]
 [ext_resource type="Script" path="res://main/fish/player_fish/player_fish.gd" id="2_yjn0a"]
 [ext_resource type="PackedScene" uid="uid://dpwashmtqkdqy" path="res://main/item/egg/egg.tscn" id="3_vtcec"]
+[ext_resource type="AudioStream" uid="uid://dv5j8lk243u6c" path="res://main/sounds/plop.ogg" id="4_gqouu"]
+[ext_resource type="AudioStream" uid="uid://obe0qgb7xids" path="res://main/sounds/wind.ogg" id="5_vm1et"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pdkuu"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("4_gqouu")
+stream_0/weight = 1.0
 
 [node name="PlayerFish" instance=ExtResource("1_jqmvt")]
 script = ExtResource("2_yjn0a")
@@ -10,7 +18,21 @@ egg_scene = ExtResource("3_vtcec")
 max_speed = 280.0
 max_radius = 128.0
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Bubbles" parent="." index="0"]
+amount = 19
+
+[node name="Sprite2D" parent="." index="1"]
 scale = Vector2(0.8, 0.8)
 
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+[node name="PlopPlayer" type="AudioStreamPlayer2D" parent="." index="6"]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_pdkuu")
+volume_db = 9.0
+
+[node name="WindPlayer" type="AudioStreamPlayer" parent="." index="7"]
+unique_name_in_owner = true
+stream = ExtResource("5_vm1et")
+volume_db = -16.0
+autoplay = true

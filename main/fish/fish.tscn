@@ -1,7 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyych6mhtvl5"]
+[gd_scene load_steps=11 format=3 uid="uid://dyych6mhtvl5"]
 
 [ext_resource type="Script" path="res://main/fish/fish.gd" id="1_vgmaj"]
 [ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="2_eodw3"]
+[ext_resource type="Texture2D" uid="uid://cchb8okmvb8pw" path="res://main/fish/bubble.png" id="3_b7rgw"]
+
+[sub_resource type="Curve" id="Curve_ogqke"]
+_data = [Vector2(0.0169231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqdea"]
 
@@ -52,6 +57,16 @@ _data = {
 [node name="Fish" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_vgmaj")
+
+[node name="Bubbles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("3_b7rgw")
+emission_shape = 1
+emission_sphere_radius = 8.0
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true

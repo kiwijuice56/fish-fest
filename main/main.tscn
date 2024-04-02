@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=7 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/world.gd" id="3_a701s"]
 [ext_resource type="Theme" uid="uid://7prt7tp301o8" path="res://main/ui/theme.tres" id="4_a1erm"]
 [ext_resource type="PackedScene" uid="uid://cvxgjdgfqpw1a" path="res://main/chunk/biomes/plain_chunk.tscn" id="4_anjt5"]
 [ext_resource type="Script" path="res://main/ui.gd" id="4_iwul6"]
+[ext_resource type="AudioStream" uid="uid://43eg67c7frqm" path="res://main/sounds/ocean.ogg" id="6_ckp15"]
 
 [node name="Main" type="Node"]
 
@@ -35,3 +36,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme = ExtResource("4_a1erm")
 text = "energy: 0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ckp15")
+volume_db = -20.0
+autoplay = true

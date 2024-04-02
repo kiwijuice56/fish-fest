@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cjtd6lb6vq13y" path="res://main/fish/boid_fish/boid_fish.tscn" id="3_aghk6"]
 [ext_resource type="Shader" path="res://main/item/egg/crack.gdshader" id="4_678ag"]
 [ext_resource type="Texture2D" uid="uid://bku3wdreak4fo" path="res://main/item/egg/crack.png" id="5_1g4wm"]
-[ext_resource type="AudioStream" uid="uid://cm8ncf01m5gul" path="res://main/fish/sounds/crack.ogg" id="5_6cbyj"]
+[ext_resource type="AudioStream" uid="uid://cm8ncf01m5gul" path="res://main/sounds/crack.ogg" id="7_40k2r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6hoxp"]
 shader = ExtResource("4_678ag")
@@ -167,7 +167,7 @@ _data = {
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4q5r2"]
 random_pitch = 1.5
 streams_count = 1
-stream_0/stream = ExtResource("5_6cbyj")
+stream_0/stream = ExtResource("7_40k2r")
 stream_0/weight = 1.0
 
 [node name="Egg" instance=ExtResource("1_326a0")]
@@ -196,6 +196,6 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="3"]
 stream = SubResource("AudioStreamRandomizer_4q5r2")
-volume_db = -7.0
+volume_db = -12.0
 max_distance = 512.0
 attenuation = 3.605

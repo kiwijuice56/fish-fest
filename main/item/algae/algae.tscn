@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://ca12mpsenr5ka" path="res://main/item/item.tscn" id="1_7dgcc"]
 [ext_resource type="Script" path="res://main/item/algae/algae.gd" id="2_745cb"]
 [ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="2_hf1jq"]
-[ext_resource type="AudioStream" uid="uid://bq1p0ncrlbakp" path="res://main/fish/sounds/bite1.ogg" id="4_hs165"]
-[ext_resource type="AudioStream" uid="uid://5eapufx1g3v" path="res://main/fish/sounds/bite2.ogg" id="5_m6kvu"]
-[ext_resource type="AudioStream" uid="uid://bfkajf1d5qy5f" path="res://main/fish/sounds/bite3.ogg" id="6_3dddh"]
-[ext_resource type="AudioStream" uid="uid://bjfctc6kumfhy" path="res://main/fish/sounds/bite4.ogg" id="7_jvv6y"]
+[ext_resource type="AudioStream" uid="uid://bq1p0ncrlbakp" path="res://main/sounds/bite1.ogg" id="4_r45nq"]
+[ext_resource type="AudioStream" uid="uid://5eapufx1g3v" path="res://main/sounds/bite2.ogg" id="5_1nwpw"]
+[ext_resource type="AudioStream" uid="uid://bfkajf1d5qy5f" path="res://main/sounds/bite3.ogg" id="6_ysuae"]
+[ext_resource type="AudioStream" uid="uid://bjfctc6kumfhy" path="res://main/sounds/bite4.ogg" id="7_ngqc7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4fmw"]
 radius = 8.0
@@ -128,13 +128,13 @@ _data = {
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_edppr"]
 random_pitch = 1.3
 streams_count = 4
-stream_0/stream = ExtResource("4_hs165")
+stream_0/stream = ExtResource("4_r45nq")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("5_m6kvu")
+stream_1/stream = ExtResource("5_1nwpw")
 stream_1/weight = 1.0
-stream_2/stream = ExtResource("6_3dddh")
+stream_2/stream = ExtResource("6_ysuae")
 stream_2/weight = 1.0
-stream_3/stream = ExtResource("7_jvv6y")
+stream_3/stream = ExtResource("7_ngqc7")
 stream_3/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_m2d58"]
