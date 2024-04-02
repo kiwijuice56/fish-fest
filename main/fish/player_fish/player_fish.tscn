@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_jqmvt"]
 [ext_resource type="Script" path="res://main/fish/player_fish/player_fish.gd" id="2_yjn0a"]
-[ext_resource type="PackedScene" uid="uid://cjtd6lb6vq13y" path="res://main/fish/boid_fish/boid_fish.tscn" id="3_ap5a3"]
+[ext_resource type="PackedScene" uid="uid://dpwashmtqkdqy" path="res://main/item/egg/egg.tscn" id="3_vtcec"]
 
 [node name="PlayerFish" instance=ExtResource("1_jqmvt")]
 script = ExtResource("2_yjn0a")
-boid_scene = ExtResource("3_ap5a3")
+egg_scene = ExtResource("3_vtcec")
 max_speed = 280.0
 max_radius = 128.0
 

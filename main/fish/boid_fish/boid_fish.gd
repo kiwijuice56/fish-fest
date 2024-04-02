@@ -18,7 +18,7 @@ func _ready() -> void:
 	%VisionArea.body_entered.connect(_on_fish_entered)
 	%VisionArea.body_exited.connect(_on_fish_exited)
 	
-	velocity = Vector2(randf() - 0.5, randf() - 0.5).normalized() * 64
+	velocity = Vector2(randf() - 0.5, randf() - 0.5).normalized() * 32
 	modulate = color_range.gradient.sample(randf())
 
 func _physics_process(delta: float) -> void:
@@ -47,6 +47,11 @@ func _physics_process(delta: float) -> void:
 	%AnimationPlayer.speed_scale = velocity.length() / max_speed * 3.0
 	
 	move_and_slide()
+
+func _item_found(area: Area2D) -> void:
+	if not area is Algae:
+		return
+	area.collect(self)
 
 func _on_fish_entered(body: PhysicsBody2D) -> void:
 	if not body is BoidFish:

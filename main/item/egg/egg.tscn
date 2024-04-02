@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpwashmtqkdqy"]
+
+[ext_resource type="PackedScene" uid="uid://ca12mpsenr5ka" path="res://main/item/item.tscn" id="1_326a0"]
+[ext_resource type="Texture2D" uid="uid://c57538ckqlr0d" path="res://main/item/egg/egg.png" id="2_ciu1a"]
+[ext_resource type="Script" path="res://main/item/egg/egg.gd" id="2_rjy7u"]
+[ext_resource type="PackedScene" uid="uid://cjtd6lb6vq13y" path="res://main/fish/boid_fish/boid_fish.tscn" id="3_aghk6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sqqc"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_5gx1y"]
+resource_name = "grow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Yolk:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_0e35s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Yolk:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54ewg"]
+_data = {
+"RESET": SubResource("Animation_0e35s"),
+"grow": SubResource("Animation_5gx1y")
+}
+
+[node name="Egg" instance=ExtResource("1_326a0")]
+script = ExtResource("2_rjy7u")
+boid_scene = ExtResource("3_aghk6")
+hatch_time = 12.0
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_ciu1a")
+
+[node name="Yolk" type="Sprite2D" parent="Sprite2D" index="0"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ciu1a")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_4sqqc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_54ewg")
+}
