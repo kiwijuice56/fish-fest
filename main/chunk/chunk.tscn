@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bausrg701dtih"]
+[gd_scene load_steps=4 format=3 uid="uid://bausrg701dtih"]
 
 [ext_resource type="Script" path="res://main/chunk/chunk.gd" id="1_0nqav"]
+[ext_resource type="PackedScene" uid="uid://dgsonuus1one7" path="res://main/item/algae/algae.tscn" id="2_1fe1f"]
 [ext_resource type="Texture2D" uid="uid://dlx2xiuysbpwb" path="res://icon.svg" id="2_qpg7u"]
 
 [node name="Chunk" type="Node2D"]
 script = ExtResource("1_0nqav")
+algae_scene = ExtResource("2_1fe1f")
 
 [node name="IDSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(391, 299)
 texture = ExtResource("2_qpg7u")

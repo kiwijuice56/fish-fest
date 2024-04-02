@@ -29,5 +29,6 @@ func update_chunks() -> void:
 func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	var new_chunk: Chunk = chunk_scene.instantiate()
 	add_child(new_chunk)
+	new_chunk.initialize()
 	new_chunk.global_position = Chunk.SIZE * chunk_pos
 	return new_chunk
