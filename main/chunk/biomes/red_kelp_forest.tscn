@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3 uid="uid://gdcii1odypin"]
+
+[ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="1_a2yxw"]
+[ext_resource type="Script" path="res://main/chunk/biomes/red_kelp_forest.gd" id="2_ef7cj"]
+[ext_resource type="PackedScene" uid="uid://cdtydk6dkigi3" path="res://main/fish/molusc/molusc.tscn" id="3_efye0"]
+[ext_resource type="PackedScene" uid="uid://blu3lnxnc6d2j" path="res://main/chunk/biomes/red_kelp.tscn" id="3_qios8"]
+
+[node name="RedKelpForest" instance=ExtResource("1_a2yxw")]
+script = ExtResource("2_ef7cj")
+muncher_scene = ExtResource("3_efye0")
+bg_color = Color(0.105882, 0.0392157, 0.109804, 1)
+kelp_scene = ExtResource("3_qios8")

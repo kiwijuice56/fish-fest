@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=13 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://7prt7tp301o8" path="res://main/ui/theme.tres" id="4_a1erm"]
 [ext_resource type="PackedScene" uid="uid://cvxgjdgfqpw1a" path="res://main/chunk/biomes/plain_chunk.tscn" id="4_anjt5"]
 [ext_resource type="Script" path="res://main/ui.gd" id="4_iwul6"]
+[ext_resource type="PackedScene" uid="uid://gdcii1odypin" path="res://main/chunk/biomes/red_kelp_forest.tscn" id="5_o3iuo"]
 [ext_resource type="AudioStream" uid="uid://43eg67c7frqm" path="res://main/sounds/ocean.ogg" id="6_ckp15"]
 [ext_resource type="Script" path="res://main/game_over.gd" id="10_588ha"]
 [ext_resource type="AudioStream" uid="uid://b64cy0li4vloe" path="res://main/sounds/death.ogg" id="11_5n2qw"]
@@ -30,12 +31,11 @@ color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node" parent="."]
 script = ExtResource("3_a701s")
-chunk_scenes = Array[PackedScene]([ExtResource("4_anjt5"), ExtResource("2_4xr5t")])
-chunk_prop = Array[float]([0.6, 1.0])
+chunk_scenes = Array[PackedScene]([ExtResource("4_anjt5"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo")])
+chunk_prop = Array[float]([0.55, 0.68, 1.0])
 squiggler_scene = ExtResource("4_0kga6")
 
 [node name="PlayerFish" parent="." instance=ExtResource("1_oks1y")]
-position = Vector2(90, 600)
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

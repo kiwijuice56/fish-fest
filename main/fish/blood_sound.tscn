@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4mqh1rhns71h"]
+
+[ext_resource type="AudioStream" uid="uid://cw6hh2v66w8hm" path="res://main/sounds/yeoouch.ogg" id="1_jnwjr"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8bmgq"]
+random_pitch = 1.4
+streams_count = 1
+stream_0/stream = ExtResource("1_jnwjr")
+stream_0/weight = 1.0
+
+[node name="BloodSound" type="AudioStreamPlayer2D"]
+process_mode = 3
+position = Vector2(-139, 0)
+stream = SubResource("AudioStreamRandomizer_8bmgq")
+volume_db = -5.0
+max_distance = 512.0
+attenuation = 2.92817

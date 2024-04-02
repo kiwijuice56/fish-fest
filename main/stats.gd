@@ -6,3 +6,6 @@ var energy: int:
 	set(val):
 		energy = val
 		energy_changed.emit()
+
+func reset() -> void:
+	energy = 0

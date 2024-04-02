@@ -13,6 +13,7 @@ var current_squiggler: Squiggler
 func _ready() -> void:
 	randomize()
 	noise = FastNoiseLite.new()
+	noise.offset = Vector3(randf(), randf(), randf()) * 1024
 	noise.frequency = 0.2
 	update_chunks()
 
@@ -46,13 +47,17 @@ func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	var i: int = 0
 	while i < len(chunk_prop) and val > chunk_prop[i]:
 		i += 1
-	if chunk_pos == Vector2():
-		val = 0
+	if chunk_pos.length() <= 2:
+		i = 0
 	
 	var new_chunk: Chunk = chunk_scenes[i].instantiate()
+	new_chunk.global_position = Chunk.SIZE * chunk_pos
 	add_child(new_chunk)
 	new_chunk.initialize()
-	new_chunk.global_position = Chunk.SIZE * chunk_pos
+	
+	if chunk_pos.length() <= 3.0:
+		new_chunk.squiggler_chance = 0
+	
 	if randf() < new_chunk.squiggler_chance and not is_instance_valid(current_squiggler):
 		current_squiggler = squiggler_scene.instantiate()
 		get_parent().add_child.call_deferred(current_squiggler)

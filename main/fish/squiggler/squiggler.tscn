@@ -70,6 +70,9 @@ speed_scale = 0.6
 [node name="Tentacles" type="Node2D" parent="." index="1"]
 unique_name_in_owner = true
 
+[node name="Bubbles" parent="." index="2"]
+amount = 24
+
 [node name="Sprite2D" parent="." index="3"]
 texture = ExtResource("4_mi2qc")
 offset = Vector2(0, 0)

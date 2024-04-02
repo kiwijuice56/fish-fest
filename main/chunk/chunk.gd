@@ -25,13 +25,24 @@ func generate_algae(min: int, max: int):
 		add_child(new_algae)
 		new_algae.position = Vector2(randi() % int(Chunk.SIZE.x), randi() % int(Chunk.SIZE.y))
 
-func generate_kelp(min: int, max: int) -> void:
+func generate_scene(scene: PackedScene, min: int, max: int) -> void:
 	var count: int = randi() % (max - min) + min
 	for i in range(count):
 		var coord: Vector2 = Vector2(randf(), randf())
 		if noise.get_noise_2d(coord.x, coord.y) > 0.5:
 			return
-		var new_kelp: Kelp = kelp_scene.instantiate()
-		add_child(new_kelp)
-		new_kelp.initialize()
-		new_kelp.position = coord * Chunk.SIZE
+		var new_something = scene.instantiate()
+		add_child(new_something)
+		if "initialize" in new_something:
+			new_something.initialize()
+		new_something.position = coord * Chunk.SIZE
+
+func generate_scene_separate(scene: PackedScene, min: int, max: int) -> void:
+	var count: int = randi() % (max - min) + min
+	for i in range(count):
+		var coord: Vector2 = Vector2(randf(), randf())
+		var new_something = scene.instantiate()
+		get_tree().get_root().add_child.call_deferred(new_something)
+		if "initialize" in new_something:
+			new_something.initialize()
+		new_something.global_position = global_position + coord * Chunk.SIZE

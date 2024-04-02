@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://smgd5yjw6rht"]
+
+[ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="1_cpalx"]
+
+[sub_resource type="Curve" id="Curve_ovalm"]
+_data = [Vector2(0.0169231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Blood" type="CPUParticles2D"]
+modulate = Color(0.780392, 0.0705882, 0.305882, 1)
+emitting = false
+amount = 48
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_cpalx")
+spread = 180.0
+gravity = Vector2(0, 8)
+initial_velocity_min = 64.0
+initial_velocity_max = 180.0
+radial_accel_min = -40.0
+radial_accel_max = -40.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ovalm")
