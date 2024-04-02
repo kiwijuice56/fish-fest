@@ -15,9 +15,11 @@ script = ExtResource("3_a701s")
 chunk_scene = ExtResource("4_anjt5")
 
 [node name="PlayerFish" parent="." instance=ExtResource("1_oks1y")]
-position = Vector2(97, 146)
+position = Vector2(-194, 297)
 
 [node name="Squiggler" parent="." instance=ExtResource("4_0kga6")]
+position = Vector2(602, -37)
+tentacle_count = 6
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_iwul6")

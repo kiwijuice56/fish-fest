@@ -1,32 +1,108 @@
-[gd_scene load_steps=5 format=3 uid="uid://ipuwdhucawjo"]
+[gd_scene load_steps=13 format=3 uid="uid://ipuwdhucawjo"]
 
 [ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_fowsh"]
 [ext_resource type="Script" path="res://main/fish/squiggler/squiggler.gd" id="2_1wj3l"]
-[ext_resource type="Texture2D" uid="uid://c57538ckqlr0d" path="res://main/item/egg/egg.png" id="3_8c84i"]
 [ext_resource type="PackedScene" uid="uid://thiyub43pqal" path="res://main/fish/squiggler/tentacle.tscn" id="4_40oiw"]
+[ext_resource type="Texture2D" uid="uid://3cnp08v3u3yb" path="res://main/fish/squiggler/face.png" id="4_mi2qc"]
+[ext_resource type="Texture2D" uid="uid://x5ck7ujcuoc7" path="res://main/fish/squiggler/teeth.png" id="5_5xq3l"]
+[ext_resource type="AudioStream" uid="uid://de7bvi8xlg0w2" path="res://main/sounds/scream.ogg" id="6_8g0rr"]
+[ext_resource type="AudioStream" uid="uid://b1hbrcgu3yh6q" path="res://main/sounds/badump.ogg" id="7_5vrlj"]
+
+[sub_resource type="Animation" id="Animation_oqm8l"]
+resource_name = "oggle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.17, 0.17), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_apvvy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pe64p"]
+_data = {
+"RESET": SubResource("Animation_apvvy"),
+"oggle": SubResource("Animation_oqm8l")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8fyd"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yv5ag"]
+radius = 800.0
 
 [node name="Squiggler" instance=ExtResource("1_fowsh")]
+collision_layer = 64
+collision_mask = 1
 script = ExtResource("2_1wj3l")
+tentacle_scene = ExtResource("4_40oiw")
+tentacle_count = 8
 
-[node name="Sprite2D" parent="." index="1"]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_8c84i")
-offset = Vector2(0, 0)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="0"]
+root_node = NodePath("../TeethHolder/Teeth")
+libraries = {
+"": SubResource("AnimationLibrary_pe64p")
+}
+autoplay = "oggle"
+speed_scale = 0.6
 
-[node name="Tentacles" type="Node2D" parent="." index="5"]
+[node name="Tentacles" type="Node2D" parent="." index="1"]
 unique_name_in_owner = true
 
-[node name="Tentacle" parent="Tentacles" index="0" instance=ExtResource("4_40oiw")]
-controller = NodePath("../..")
+[node name="Sprite2D" parent="." index="3"]
+texture = ExtResource("4_mi2qc")
+offset = Vector2(0, 0)
 
-[node name="Tentacle2" parent="Tentacles" index="1" instance=ExtResource("4_40oiw")]
-rotation = -1.5708
-controller = NodePath("../..")
+[node name="TeethHolder" type="Node2D" parent="." index="4"]
+scale = Vector2(2, 2)
 
-[node name="Tentacle3" parent="Tentacles" index="2" instance=ExtResource("4_40oiw")]
-rotation = 3.14159
-controller = NodePath("../..")
+[node name="Teeth" type="Sprite2D" parent="TeethHolder" index="0"]
+rotation = 8.30009
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_5xq3l")
 
-[node name="Tentacle4" parent="Tentacles" index="3" instance=ExtResource("4_40oiw")]
-rotation = 1.5708
-controller = NodePath("../..")
+[node name="CollisionShape2D" parent="." index="5"]
+shape = SubResource("CircleShape2D_x8fyd")
+
+[node name="VisionArea" parent="." index="6"]
+visible = true
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+shape = SubResource("CircleShape2D_yv5ag")
+
+[node name="CollectionArea" parent="." index="7"]
+visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("6_8g0rr")
+volume_db = -12.0
+pitch_scale = 0.7
+autoplay = true
+max_distance = 1400.0
+attenuation = 2.07053
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("7_5vrlj")
+autoplay = true
+max_distance = 800.0
+attenuation = 2.07053
