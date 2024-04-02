@@ -13,6 +13,8 @@ var commander: PlayerFish
 var fish_sighted: Array[BoidFish]
 
 func _ready() -> void:
+	super._ready()
+	
 	%VisionArea.body_entered.connect(_on_fish_entered)
 	%VisionArea.body_exited.connect(_on_fish_exited)
 	

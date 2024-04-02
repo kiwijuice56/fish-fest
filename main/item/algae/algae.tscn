@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgsonuus1one7"]
+[gd_scene load_steps=16 format=3 uid="uid://dgsonuus1one7"]
 
 [ext_resource type="PackedScene" uid="uid://ca12mpsenr5ka" path="res://main/item/item.tscn" id="1_7dgcc"]
 [ext_resource type="Script" path="res://main/item/algae/algae.gd" id="2_745cb"]
 [ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="2_hf1jq"]
+[ext_resource type="AudioStream" uid="uid://bq1p0ncrlbakp" path="res://main/fish/sounds/bite1.ogg" id="4_hs165"]
+[ext_resource type="AudioStream" uid="uid://5eapufx1g3v" path="res://main/fish/sounds/bite2.ogg" id="5_m6kvu"]
+[ext_resource type="AudioStream" uid="uid://bfkajf1d5qy5f" path="res://main/fish/sounds/bite3.ogg" id="6_3dddh"]
+[ext_resource type="AudioStream" uid="uid://bjfctc6kumfhy" path="res://main/fish/sounds/bite4.ogg" id="7_jvv6y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4fmw"]
 radius = 8.0
@@ -37,18 +41,114 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r74ul"]
+resource_name = "eat"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ovfb8"]
 _data = {
 "RESET": SubResource("Animation_84tq7"),
+"eat": SubResource("Animation_r74ul"),
 "spin": SubResource("Animation_vxtgc")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_edppr"]
+random_pitch = 1.3
+streams_count = 4
+stream_0/stream = ExtResource("4_hs165")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_m6kvu")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_3dddh")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_jvv6y")
+stream_3/weight = 1.0
+
+[sub_resource type="Curve" id="Curve_m2d58"]
+_data = [Vector2(0, 0.976037), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_if7sm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Algae" instance=ExtResource("1_7dgcc")]
 script = ExtResource("2_745cb")
 
 [node name="Sprite2D" parent="." index="0"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_hf1jq")
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -60,3 +160,28 @@ libraries = {
 }
 autoplay = "spin"
 speed_scale = 0.2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = SubResource("AudioStreamRandomizer_edppr")
+volume_db = -16.0
+max_distance = 512.0
+attenuation = 4.14106
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 12
+one_shot = true
+speed_scale = 0.8
+explosiveness = 0.92
+randomness = 1.0
+texture = ExtResource("2_hf1jq")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.0
+initial_velocity_max = 120.0
+radial_accel_min = -70.0
+radial_accel_max = -70.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_m2d58")
+color_ramp = SubResource("Gradient_if7sm")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyych6mhtvl5"]
+[gd_scene load_steps=9 format=3 uid="uid://dyych6mhtvl5"]
 
 [ext_resource type="Script" path="res://main/fish/fish.gd" id="1_vgmaj"]
 [ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="2_eodw3"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k5b57"]
 radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7or44"]
+radius = 16.0
 
 [sub_resource type="Animation" id="Animation_o0m70"]
 resource_name = "basic_swim"
@@ -69,6 +72,15 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
 shape = SubResource("CircleShape2D_k5b57")
+
+[node name="CollectionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+shape = SubResource("CircleShape2D_7or44")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
