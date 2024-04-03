@@ -3,6 +3,8 @@ extends Node
 signal energy_changed
 signal fish_changed
 
+
+var first_game: bool = true
 var energy: int:
 	set(val):
 		energy = val

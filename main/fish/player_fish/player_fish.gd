@@ -5,6 +5,7 @@ extends Fish
 @export var max_speed: float = 128.0
 @export var max_radius: float = 128.0
 
+var dead: bool = false
 var locked: bool = false
 
 func _input(event: InputEvent) -> void:

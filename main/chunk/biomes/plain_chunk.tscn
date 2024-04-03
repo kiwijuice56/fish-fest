@@ -6,4 +6,4 @@
 [node name="Plain" instance=ExtResource("1_3clp4")]
 script = ExtResource("2_u8lpd")
 bg_color = Color(0, 0.0156863, 0.0588235, 1)
-squiggler_chance = 0.15
+squiggler_chance = 0.4

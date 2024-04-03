@@ -7,4 +7,5 @@ func gameover() -> void:
 func _ready() -> void:
 	Stats.reset()
 	Ref.refresh()
-	get_tree().paused = false
+	if not Stats.first_game:
+		get_tree().paused = false
