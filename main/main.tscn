@@ -1,17 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=17 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
 [ext_resource type="PackedScene" uid="uid://d2klanuia8oej" path="res://main/chunk/biomes/kelp_forest.tscn" id="2_4xr5t"]
+[ext_resource type="PackedScene" uid="uid://btcyas23iudqm" path="res://main/chunk/biomes/blue_kelp_forest.tscn" id="3_1sm8v"]
 [ext_resource type="Script" path="res://main/world.gd" id="3_a701s"]
 [ext_resource type="PackedScene" uid="uid://ipuwdhucawjo" path="res://main/fish/squiggler/squiggler.tscn" id="4_0kga6"]
 [ext_resource type="Theme" uid="uid://7prt7tp301o8" path="res://main/ui/theme.tres" id="4_a1erm"]
-[ext_resource type="PackedScene" uid="uid://cvxgjdgfqpw1a" path="res://main/chunk/biomes/plain_chunk.tscn" id="4_anjt5"]
+[ext_resource type="PackedScene" uid="uid://cvxgjdgfqpw1a" path="res://main/chunk/biomes/plain_chunk.tscn" id="4_fgrql"]
 [ext_resource type="Script" path="res://main/ui.gd" id="4_iwul6"]
 [ext_resource type="PackedScene" uid="uid://gdcii1odypin" path="res://main/chunk/biomes/red_kelp_forest.tscn" id="5_o3iuo"]
+[ext_resource type="PackedScene" uid="uid://b5h6yedbwtqx6" path="res://main/chunk/biomes/brown_kelp_forest.tscn" id="6_1fw3q"]
 [ext_resource type="AudioStream" uid="uid://43eg67c7frqm" path="res://main/sounds/ocean.ogg" id="6_ckp15"]
 [ext_resource type="Script" path="res://main/game_over.gd" id="10_588ha"]
 [ext_resource type="AudioStream" uid="uid://b64cy0li4vloe" path="res://main/sounds/death.ogg" id="11_5n2qw"]
+[ext_resource type="Shader" path="res://main/ui/vignette.gdshader" id="12_kclni"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4jri"]
+shader = ExtResource("12_kclni")
+shader_parameter/alpha = 1.46
+shader_parameter/inner_radius = 0.28
+shader_parameter/outer_radius = 3.175
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yo3c6")
@@ -31,8 +40,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node" parent="."]
 script = ExtResource("3_a701s")
-chunk_scenes = Array[PackedScene]([ExtResource("4_anjt5"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo")])
-chunk_prop = Array[float]([0.55, 0.68, 1.0])
+chunk_scenes = Array[PackedScene]([ExtResource("4_fgrql"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo"), ExtResource("6_1fw3q"), ExtResource("3_1sm8v")])
+chunk_prop = Array[float]([0.4, 0.48, 0.55, 0.63])
 squiggler_scene = ExtResource("4_0kga6")
 
 [node name="PlayerFish" parent="." instance=ExtResource("1_oks1y")]
@@ -41,6 +50,14 @@ squiggler_scene = ExtResource("4_0kga6")
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("4_iwul6")
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_y4jri")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 15

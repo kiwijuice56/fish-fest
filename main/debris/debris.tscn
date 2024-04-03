@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwr2o8lrq8uvu"]
+
+[ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="1_lksgu"]
+[ext_resource type="Script" path="res://main/debris/debris.gd" id="2_60kr6"]
+
+[sub_resource type="Gradient" id="Gradient_g50d2"]
+offsets = PackedFloat32Array(0, 0.991071)
+colors = PackedColorArray(0.1776, 0.37, 0.1295, 1, 0.47451, 0.478431, 0.25098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7r28d"]
+gradient = SubResource("Gradient_g50d2")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dy1f0"]
+radius = 64.0
+
+[node name="Debris" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.717647)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_lksgu")
+script = ExtResource("2_60kr6")
+color = SubResource("GradientTexture1D_7r28d")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 98
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_dy1f0")

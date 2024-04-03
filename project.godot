@@ -54,6 +54,10 @@ mouse_right={
 2d_physics/layer_6="tentacle"
 2d_physics/layer_7="squiggler"
 
+[physics]
+
+2d/solver/solver_iterations=12
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

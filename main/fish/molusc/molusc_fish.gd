@@ -60,21 +60,21 @@ func _item_found(area: Area2D) -> void:
 	area.collect(self)
 
 func _on_fish_entered(body: PhysicsBody2D) -> void:
-	if not body == self and (body is PlayerFish or body is BoidFish):
+	if not body == self and (body is PlayerFish or body is BoidFish or body is OtherBoidFish):
 		targets.append(body)
 	elif not body == self and body is MoluscFish:
 		fish_sighted.append(body)
 
 func _on_fish_exited(body: PhysicsBody2D) -> void:
-	if (body is PlayerFish or body is BoidFish):
+	if (body is PlayerFish or body is BoidFish or body is OtherBoidFish):
 		targets.remove_at(targets.find(body))
 	elif not body == self and body is MoluscFish:
 		fish_sighted.remove_at(fish_sighted.find(body))
 
 func _on_kill_entered(body: PhysicsBody2D) -> void:
-	if (body is BoidFish or body is PlayerFish) and not %AnimationPlayer2.is_playing():
+	if (body is BoidFish or body is PlayerFish or body is OtherBoidFish) and not %AnimationPlayer2.is_playing():
 		%AnimationPlayer2.play("kill")
-		if body is BoidFish:
+		if (body is BoidFish or OtherBoidFish) and not body is PlayerFish:
 			body.queue_free()
-		else:
+		elif body is PlayerFish:
 			Ref.main.gameover.call_deferred()

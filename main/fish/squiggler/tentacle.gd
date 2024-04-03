@@ -1,6 +1,7 @@
 class_name Tentacle
 extends Node2D
 
+@export var hostile: bool = true
 @export var cooldown_time: float = 12.0
 @export var controller: NodePath
 @onready var joints: Node2D = $Joints
@@ -11,10 +12,11 @@ var lunging: bool = false
 
 func _ready() -> void:
 	$PinJoint2D.node_a = "../../../"
-	%Killer.body_entered.connect(_on_prey_entered)
-	%Seen.body_entered.connect(_on_prey_seen)
-	%Seen.body_exited.connect(_on_prey_left)
-	%Timer.timeout.connect(_on_lunge)
+	if hostile:
+		%Killer.body_entered.connect(_on_prey_entered)
+		%Seen.body_entered.connect(_on_prey_seen)
+		%Seen.body_exited.connect(_on_prey_left)
+		%Timer.timeout.connect(_on_lunge)
 	
 	%AnimationPlayer.speed_scale = 1.0 / cooldown_time
 

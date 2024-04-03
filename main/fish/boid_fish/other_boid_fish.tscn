@@ -1,14 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjtd6lb6vq13y"]
+[gd_scene load_steps=9 format=3 uid="uid://db80fu1l1bwd5"]
 
-[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_qb7eh"]
-[ext_resource type="Script" path="res://main/fish/boid_fish/boid_fish.gd" id="2_xpvhy"]
-[ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="3_8yl7t"]
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_5h64a"]
+[ext_resource type="Script" path="res://main/fish/boid_fish/other_boid_fish.gd" id="2_adt4t"]
+[ext_resource type="Texture2D" uid="uid://gufpl4sq0wo3" path="res://main/fish/fish2.png" id="3_bfe5g"]
 
-[sub_resource type="Gradient" id="Gradient_w1xur"]
-colors = PackedColorArray(0.41, 0.41, 0.41, 1, 0.74, 0.74, 0.74, 1)
+[sub_resource type="CircleShape2D" id="CircleShape2D_txltp"]
+radius = 4.0
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6ents"]
-gradient = SubResource("Gradient_w1xur")
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbo77"]
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_ccgc3"]
 length = 0.001
@@ -48,19 +48,24 @@ _data = {
 "basic_swim": SubResource("Animation_o0m70")
 }
 
-[node name="BoidFish" instance=ExtResource("1_qb7eh")]
-script = ExtResource("2_xpvhy")
-color_range = SubResource("GradientTexture1D_6ents")
-max_speed = 260.0
+[node name="BoidFish" instance=ExtResource("1_5h64a")]
+script = ExtResource("2_adt4t")
+max_speed = 120.0
 cohesion = 2.0
 separation = 4.0
-alignment = 0.5
-player_follow = 1.2
-player_alignment = 0.5
+alignment = 0.7
+despawn_distance = 1200.0
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("3_8yl7t")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_bfe5g")
 hframes = 5
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CircleShape2D_txltp")
+
+[node name="CollisionShape2D" parent="CollectionArea" index="0"]
+shape = SubResource("CircleShape2D_jbo77")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 unique_name_in_owner = true

@@ -6,5 +6,5 @@ extends Chunk
 func initialize() -> void:
 	super.initialize()
 	generate_algae(8, 25)
-	generate_scene(kelp_scene, 4, 32)
-	generate_scene_separate(muncher_scene, 2, 5)
+	generate_scene(kelp_scene, 4, 16)
+	generate_scene_separate(muncher_scene, 0, 2)

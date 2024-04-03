@@ -4,12 +4,13 @@ extends Node2D
 @export var bg_color: Color
 @export var algae_scene: PackedScene
 @export var kelp_scene: PackedScene
+@export var debris_scene: PackedScene
 @export var squiggler_chance: float = 0.0
 
 var id_color: Color
 var noise: FastNoiseLite
 
-const SIZE: Vector2 = Vector2(800, 600)
+const SIZE: Vector2 = Vector2(900, 900)
 
 func _ready() -> void:
 	pass
@@ -17,6 +18,7 @@ func _ready() -> void:
 func initialize() -> void:
 	%IDSprite.modulate = Color.from_hsv(randf(), 1.0, 1.0)
 	noise = FastNoiseLite.new()
+	generate_scene(debris_scene, 12, 22)
 
 func generate_algae(min: int, max: int):
 	var count: int = randi() % (max - min) + min
@@ -30,7 +32,7 @@ func generate_scene(scene: PackedScene, min: int, max: int) -> void:
 	for i in range(count):
 		var coord: Vector2 = Vector2(randf(), randf())
 		if noise.get_noise_2d(coord.x, coord.y) > 0.5:
-			return
+			continue
 		var new_something = scene.instantiate()
 		add_child(new_something)
 		if "initialize" in new_something:
