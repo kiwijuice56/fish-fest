@@ -27,7 +27,7 @@ func _on_eggs_changed(old: int, new: int) -> void:
 	if new > old:
 		$AudioStreamPlayer.playing = true
 		add_egg()
-	elif new < old:
+	elif new < old and $EggContainer.get_child_count() > 0:
 		remove_egg()
 
 func add_egg() -> void:
@@ -39,7 +39,7 @@ func add_egg() -> void:
 	var small_egg_position: Vector2 = Vector2(((Stats.eggs - 1) % 3) * 23, int((Stats.eggs - 1) / 3) * 23 + 63)
 	var tween: Tween = get_tree().create_tween().set_parallel(true).set_ease(Tween.EASE_IN)
 	tween.tween_property(new_egg_big, "global_position", $EggContainer.global_position + small_egg_position, 0.3)
-	tween.tween_property(new_egg_big, "scale", Vector2(0.075, 0.075), 0.3)
+	tween.tween_property(new_egg_big, "scale", Vector2(0.075, 0.075), 0.2)
 	
 	await tween.finished
 	var new_egg_small: Sprite2D = egg_small_scene.instantiate()

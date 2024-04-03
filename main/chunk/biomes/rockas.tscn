@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvvlighoypmm2"]
+
+[ext_resource type="Script" path="res://main/chunk/biomes/rockas.gd" id="1_kv20v"]
+[ext_resource type="Texture2D" uid="uid://bbreylkeuu63c" path="res://main/chunk/biomes/rockas.png" id="2_gqt0d"]
+
+[sub_resource type="Gradient" id="Gradient_wwhcy"]
+colors = PackedColorArray(0.145098, 0.121569, 0.211765, 1, 0.0901961, 0.0588235, 0.121569, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1kaw4"]
+gradient = SubResource("Gradient_wwhcy")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqbv6"]
+radius = 22.0
+
+[sub_resource type="Animation" id="Animation_okgjk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_h3q83"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 12.5664]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46sf3"]
+_data = {
+"RESET": SubResource("Animation_okgjk"),
+"rotate": SubResource("Animation_h3q83")
+}
+
+[node name="Rockas" type="StaticBody2D"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+collision_mask = 0
+script = ExtResource("1_kv20v")
+color = SubResource("GradientTexture1D_1kaw4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lqbv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_gqt0d")
+hframes = 3
+frame = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.713726, 0.713726, 0.713726, 1)
+z_index = 1
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("2_gqt0d")
+hframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_46sf3")
+}
+autoplay = "rotate"
+speed_scale = -2.0

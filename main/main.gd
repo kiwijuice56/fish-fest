@@ -9,6 +9,7 @@ func player_death() -> void:
 			Ref.player.velocity = boid.velocity
 			boid.queue_free()
 			replaced = true
+			break
 	if not replaced:
 		$GameOver.gameover()
 

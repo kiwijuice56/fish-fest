@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=29 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
 [ext_resource type="PackedScene" uid="uid://d2klanuia8oej" path="res://main/chunk/biomes/kelp_forest.tscn" id="2_4xr5t"]
 [ext_resource type="PackedScene" uid="uid://btcyas23iudqm" path="res://main/chunk/biomes/blue_kelp_forest.tscn" id="3_1sm8v"]
 [ext_resource type="Script" path="res://main/world.gd" id="3_a701s"]
+[ext_resource type="PackedScene" uid="uid://bfx1smpfc1waf" path="res://main/chunk/biomes/rocky_biome.tscn" id="3_y1hmw"]
 [ext_resource type="PackedScene" uid="uid://ipuwdhucawjo" path="res://main/fish/squiggler/squiggler.tscn" id="4_0kga6"]
 [ext_resource type="Theme" uid="uid://7prt7tp301o8" path="res://main/ui/theme.tres" id="4_a1erm"]
 [ext_resource type="PackedScene" uid="uid://cvxgjdgfqpw1a" path="res://main/chunk/biomes/plain_chunk.tscn" id="4_fgrql"]
@@ -266,8 +267,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node" parent="."]
 script = ExtResource("3_a701s")
-chunk_scenes = Array[PackedScene]([ExtResource("4_fgrql"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo"), ExtResource("6_1fw3q"), ExtResource("3_1sm8v")])
-chunk_prop = Array[float]([0.4, 0.48, 0.55, 0.63])
+chunk_scenes = Array[PackedScene]([ExtResource("4_fgrql"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo"), ExtResource("6_1fw3q"), ExtResource("3_1sm8v"), ExtResource("3_y1hmw")])
+chunk_prop = Array[float]([0.4, 0.51, 0.56, 0.6, 0.65])
 squiggler_scene = ExtResource("4_0kga6")
 
 [node name="BoidFish" parent="." node_paths=PackedStringArray("commander") instance=ExtResource("10_8vs0t")]
@@ -282,7 +283,7 @@ process_mode = 3
 script = ExtResource("4_iwul6")
 
 [node name="EggContainer" type="Node2D" parent="UI"]
-position = Vector2(156, 0)
+position = Vector2(160, 0)
 
 [node name="Vignette" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_y4jri")
@@ -303,6 +304,18 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
+[node name="MarginContainer2" type="MarginContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_a1erm")
+theme_override_constants/margin_left = 139
+
+[node name="Label" type="Label" parent="UI/MarginContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "eggs"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -316,7 +329,7 @@ theme_override_constants/margin_left = 34
 [node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "food   eggs"
+text = "food   "
 
 [node name="Boggle" type="ColorRect" parent="UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -470,7 +483,6 @@ speed_scale = 0.2
 
 [node name="Title" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

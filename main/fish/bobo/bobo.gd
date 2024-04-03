@@ -1,4 +1,4 @@
-class_name MoluscFish
+class_name Bobo
 extends Fish
  
 @export var max_speed: float = 150.0
@@ -19,7 +19,7 @@ func _ready() -> void:
 	%VisionArea.body_exited.connect(_on_fish_exited)
 	%KillArea.body_entered.connect(_on_kill_entered)
 	
-	velocity = Vector2(randf() - 0.5, randf() - 0.5).normalized() * 64
+	velocity = Vector2(randf() - 0.5, randf() - 0.5).normalized() * max_speed
 
 func _physics_process(delta: float) -> void:
 	var close: Vector2 = Vector2()
@@ -41,9 +41,9 @@ func _physics_process(delta: float) -> void:
 			avg_position += fish.global_position
 		avg_position /= len(targets)
 		velocity += (avg_position - global_position) * chase * delta
-		max_speed = lerp(max_speed, 180.0, delta * 2)
+		#max_speed = lerp(max_speed, 64.0, delta * 2)
 	else:
-		max_speed = lerp(max_speed, 64.0, delta * 2)
+		max_speed = lerp(max_speed, max_speed, delta * 2)
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed
 	rotation = lerp_angle(rotation, Vector2(1,0).angle_to(velocity.normalized()), delta * rot)

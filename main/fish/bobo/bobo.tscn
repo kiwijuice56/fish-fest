@@ -1,0 +1,403 @@
+[gd_scene load_steps=23 format=3 uid="uid://cotpln6upwern"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_ntfn3"]
+[ext_resource type="Script" path="res://main/fish/bobo/bobo.gd" id="2_51bc7"]
+[ext_resource type="Texture2D" uid="uid://cu7ukbnufa87u" path="res://main/fish/bobo/bobo.png" id="3_qdhlq"]
+[ext_resource type="Texture2D" uid="uid://cchb8okmvb8pw" path="res://main/fish/bubble.png" id="3_y1aue"]
+[ext_resource type="Script" path="res://main/fish/squiggler/tentacle.gd" id="4_7s4y7"]
+[ext_resource type="PackedScene" uid="uid://b4mqh1rhns71h" path="res://main/fish/blood_sound.tscn" id="4_i3b2o"]
+[ext_resource type="Script" path="res://main/fish/bobo/flailer.gd" id="4_o5eik"]
+[ext_resource type="PackedScene" uid="uid://smgd5yjw6rht" path="res://main/fish/blood.tscn" id="5_iv4bw"]
+[ext_resource type="AudioStream" uid="uid://copqut8gmkubj" path="res://main/sounds/chirp.ogg" id="9_wwtwr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fo7k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_426b1"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yn4xu"]
+radius = 4.0
+
+[sub_resource type="Curve" id="Curve_ogqke"]
+_data = [Vector2(0.0169231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1mprm"]
+_data = [Vector2(0.0101156, 0.981298), 0.0, 0.0, 0, 0, Vector2(1, 0.0265108), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ql15j"]
+radius = 256.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpiab"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_bpi4p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_t562k"]
+resource_name = "fwoom"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7odx"]
+_data = {
+"RESET": SubResource("Animation_bpi4p"),
+"fwoom": SubResource("Animation_t562k")
+}
+
+[sub_resource type="Animation" id="Animation_m6uim"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillArea/Blood:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KillArea/BloodSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7emdi"]
+resource_name = "kill"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillArea/Blood:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KillArea/BloodSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ru8ax"]
+_data = {
+"RESET": SubResource("Animation_m6uim"),
+"kill": SubResource("Animation_7emdi")
+}
+
+[node name="Bobo" instance=ExtResource("1_ntfn3")]
+collision_layer = 66
+script = ExtResource("2_51bc7")
+max_speed = 54.0
+cohesion = 1.0
+alignment = 1.0
+separation = 1.0
+despawn_range = 1600.0
+rot = 1.0
+chase = 0.0
+
+[node name="KillArea" type="Area2D" parent="." index="0"]
+unique_name_in_owner = true
+position = Vector2(15, 1)
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="BloodSound" parent="KillArea" index="0" instance=ExtResource("4_i3b2o")]
+volume_db = -8.0
+
+[node name="Blood" parent="KillArea" index="1" instance=ExtResource("5_iv4bw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea" index="2"]
+shape = SubResource("CircleShape2D_0fo7k")
+
+[node name="Bubbles" parent="." index="1"]
+position = Vector2(-25, 1)
+emission_sphere_radius = 10.0
+
+[node name="Sprite2D" parent="." index="2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_qdhlq")
+offset = Vector2(-8.645, 0)
+hframes = 3
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_426b1")
+
+[node name="TentacleContainer" type="Node2D" parent="." index="4"]
+script = ExtResource("4_o5eik")
+
+[node name="Tentacle" type="Node2D" parent="TentacleContainer" index="0"]
+position = Vector2(-19, 1)
+rotation = 3.14159
+script = ExtResource("4_7s4y7")
+hostile = false
+controller = NodePath("../..")
+
+[node name="Joints" type="Node2D" parent="TentacleContainer/Tentacle" index="0"]
+
+[node name="Joint1" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="0"]
+position = Vector2(17, -1.50591e-06)
+collision_layer = 32
+collision_mask = 96
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint1" index="0"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="Bubbles2" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint1" index="1"]
+unique_name_in_owner = true
+rotation = 3.14159
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Joint2" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="1"]
+position = Vector2(28, -2.4397e-06)
+collision_layer = 32
+collision_mask = 96
+mass = 0.02
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint2" index="0"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="Bubbles3" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint2" index="1"]
+unique_name_in_owner = true
+rotation = 3.14159
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Joint4" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="2"]
+position = Vector2(39, -3.43707e-06)
+collision_layer = 32
+collision_mask = 96
+mass = 0.02
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint4" index="0"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="Bubbles4" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint4" index="1"]
+unique_name_in_owner = true
+rotation = 3.14159
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Joint3" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="3"]
+position = Vector2(51, -4.44237e-06)
+collision_layer = 32
+collision_mask = 96
+mass = 0.02
+gravity_scale = 0.0
+
+[node name="Bubbles5" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint3" index="0"]
+unique_name_in_owner = true
+rotation = 3.14159
+amount = 6
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint3" index="1"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="Joint5" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="4"]
+position = Vector2(62, -5.4755e-06)
+collision_layer = 32
+collision_mask = 96
+mass = 0.02
+gravity_scale = 0.0
+
+[node name="Bubbles6" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint5" index="0"]
+unique_name_in_owner = true
+rotation = 3.14159
+amount = 4
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint5" index="1"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="Joint6" type="RigidBody2D" parent="TentacleContainer/Tentacle/Joints" index="5"]
+position = Vector2(73, -6.43714e-06)
+collision_layer = 32
+collision_mask = 96
+mass = 0.02
+gravity_scale = 0.0
+
+[node name="Bubbles7" type="CPUParticles2D" parent="TentacleContainer/Tentacle/Joints/Joint6" index="0"]
+unique_name_in_owner = true
+rotation = 3.14159
+amount = 2
+texture = ExtResource("3_y1aue")
+emission_shape = 1
+emission_sphere_radius = 4.85
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TentacleContainer/Tentacle/Joints/Joint6" index="1"]
+shape = SubResource("CircleShape2D_yn4xu")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="1"]
+position = Vector2(10, -8.93991e-07)
+node_a = NodePath("../../..")
+node_b = NodePath("../Joints/Joint1")
+disable_collision = false
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="2"]
+position = Vector2(23, -2.0185e-06)
+node_a = NodePath("../Joints/Joint1")
+node_b = NodePath("../Joints/Joint2")
+disable_collision = false
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="3"]
+position = Vector2(33, -2.86884e-06)
+node_a = NodePath("../Joints/Joint2")
+node_b = NodePath("../Joints/Joint4")
+disable_collision = false
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="4"]
+position = Vector2(46, -4.04105e-06)
+node_a = NodePath("../Joints/Joint4")
+node_b = NodePath("../Joints/Joint3")
+disable_collision = false
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="5"]
+position = Vector2(57, -5.0027e-06)
+node_a = NodePath("../Joints/Joint3")
+node_b = NodePath("../Joints/Joint5")
+disable_collision = false
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="TentacleContainer/Tentacle" index="6"]
+position = Vector2(67, -5.87693e-06)
+node_a = NodePath("../Joints/Joint5")
+node_b = NodePath("../Joints/Joint6")
+disable_collision = false
+
+[node name="Line2D" type="Line2D" parent="TentacleContainer/Tentacle" index="7"]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 12.0
+width_curve = SubResource("Curve_1mprm")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Timer" type="Timer" parent="TentacleContainer/Tentacle" index="8"]
+unique_name_in_owner = true
+wait_time = 0.3
+autostart = true
+
+[node name="VisionArea" parent="." index="5"]
+visible = true
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+shape = SubResource("CircleShape2D_ql15j")
+
+[node name="CollectionArea" parent="." index="6"]
+position = Vector2(24, 1)
+
+[node name="CollisionShape2D" parent="CollectionArea" index="0"]
+shape = SubResource("CircleShape2D_lpiab")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_g7odx")
+}
+autoplay = "fwoom"
+speed_scale = 5.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="8"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ru8ax")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("9_wwtwr")
+volume_db = -17.0
+pitch_scale = 0.7
+autoplay = true
+max_distance = 500.0
+attenuation = 2.14355
+
+[node name="Timer2" type="Timer" parent="." index="10"]
+unique_name_in_owner = true
+wait_time = 0.5
+autostart = true

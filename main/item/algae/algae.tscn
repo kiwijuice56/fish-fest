@@ -156,6 +156,7 @@ script = ExtResource("2_745cb")
 color = SubResource("GradientTexture1D_ttu6x")
 
 [node name="Sprite2D" parent="." index="0"]
+modulate = Color(1, 1, 1, 0.780392)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_hf1jq")
 

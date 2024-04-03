@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfx1smpfc1waf"]
+
+[ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="1_nwtp2"]
+[ext_resource type="Script" path="res://main/chunk/biomes/rocky_biome.gd" id="2_gsjr8"]
+[ext_resource type="PackedScene" uid="uid://cotpln6upwern" path="res://main/fish/bobo/bobo.tscn" id="3_3a8wp"]
+[ext_resource type="PackedScene" uid="uid://bvvlighoypmm2" path="res://main/chunk/biomes/rockas.tscn" id="4_qkwj6"]
+
+[node name="RockyBiome" instance=ExtResource("1_nwtp2")]
+script = ExtResource("2_gsjr8")
+muncher_scene = ExtResource("3_3a8wp")
+rock_scene = ExtResource("4_qkwj6")
+bg_color = Color(0.0117647, 0.0156863, 0.0392157, 1)
