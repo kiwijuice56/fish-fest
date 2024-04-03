@@ -7,9 +7,9 @@ _data = [Vector2(0.0169231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Blood" type="CPUParticles2D"]
-modulate = Color(0.780392, 0.0705882, 0.305882, 1)
+modulate = Color(0.909804, 0.0823529, 0.356863, 1)
 emitting = false
-amount = 48
+amount = 64
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0

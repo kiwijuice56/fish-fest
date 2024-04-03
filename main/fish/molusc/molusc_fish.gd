@@ -76,5 +76,7 @@ func _on_kill_entered(body: PhysicsBody2D) -> void:
 		%AnimationPlayer2.play("kill")
 		if (body is BoidFish or OtherBoidFish) and not body is PlayerFish:
 			body.queue_free()
+			Stats.fish -= 1
 		elif body is PlayerFish:
+			Stats.fish -= 1
 			Ref.main.gameover.call_deferred()

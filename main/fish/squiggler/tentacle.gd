@@ -30,8 +30,10 @@ func _on_prey_entered(body: PhysicsBody2D):
 		%AnimationPlayer.play("kill")
 		
 		if body is BoidFish:
+			Stats.fish -= 1
 			body.queue_free()
 		else:
+			Stats.fish -= 1
 			Ref.main.gameover.call_deferred()
 
 func _on_prey_seen(body: PhysicsBody2D):

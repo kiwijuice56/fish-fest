@@ -24,3 +24,4 @@ func spawn_boid() -> void:
 	get_parent().move_child(new_boid, 0)
 	new_boid.global_position = global_position
 	new_boid.commander = Ref.player
+	Stats.fish += 1

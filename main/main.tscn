@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=21 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
@@ -15,12 +15,21 @@
 [ext_resource type="Script" path="res://main/game_over.gd" id="10_588ha"]
 [ext_resource type="AudioStream" uid="uid://b64cy0li4vloe" path="res://main/sounds/death.ogg" id="11_5n2qw"]
 [ext_resource type="Shader" path="res://main/ui/vignette.gdshader" id="12_kclni"]
+[ext_resource type="Shader" path="res://main/ui/liquid.gdshader" id="13_ibh7c"]
+[ext_resource type="Shader" path="res://main/ui/inv.gdshader" id="14_kkfqs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y4jri"]
 shader = ExtResource("12_kclni")
 shader_parameter/alpha = 1.46
 shader_parameter/inner_radius = 0.28
 shader_parameter/outer_radius = 3.175
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wli21"]
+shader = ExtResource("13_ibh7c")
+shader_parameter/fV = 0.53
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bbob"]
+shader = ExtResource("14_kkfqs")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yo3c6")
@@ -51,7 +60,7 @@ unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("4_iwul6")
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
+[node name="Vignette" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_y4jri")
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,13 +79,39 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="EnergyLabel" type="Label" parent="UI/MarginContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
 theme = ExtResource("4_a1erm")
-text = "energy: 0"
+theme_override_constants/separation = -8
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "eggs"
+
+[node name="Boggle" type="ColorRect" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wli21")
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 2
+
+[node name="EnergyLabel" type="Label" parent="UI/MarginContainer/VBoxContainer/Boggle"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2bbob")
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 40.0
+offset_right = 86.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 37
+text = "0"
+horizontal_alignment = 1
 
 [node name="GameOver" type="ColorRect" parent="UI"]
 unique_name_in_owner = true
