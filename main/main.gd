@@ -1,8 +1,16 @@
 class_name Main
 extends Node
 
-func gameover() -> void:
-	$GameOver.gameover()
+func player_death() -> void:
+	var replaced: bool = false
+	for boid in get_tree().get_nodes_in_group("children"):
+		if is_instance_valid(boid):
+			Ref.player.global_position = boid.global_position
+			Ref.player.velocity = boid.velocity
+			boid.queue_free()
+			replaced = true
+	if not replaced:
+		$GameOver.gameover()
 
 func _ready() -> void:
 	Stats.reset()

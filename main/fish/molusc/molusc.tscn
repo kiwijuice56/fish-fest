@@ -187,6 +187,5 @@ stream = ExtResource("6_3lquu")
 volume_db = -22.0
 pitch_scale = 0.7
 autoplay = true
-stream_paused = true
 max_distance = 500.0
 attenuation = 2.14355

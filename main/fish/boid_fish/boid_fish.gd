@@ -8,9 +8,11 @@ extends Fish
 @export var alignment: float = 1.0
 @export var player_follow: float = 2.0
 @export var player_alignment: float = 2.0
+@export var despawn_distance: float = 2000
 
-var commander: PlayerFish
+@export var commander: PlayerFish
 var fish_sighted: Array[BoidFish]
+var dead: bool = false
 
 func _ready() -> void:
 	super._ready()
@@ -37,6 +39,10 @@ func _physics_process(delta: float) -> void:
 		velocity += (avg_position - global_position) * cohesion * delta
 	
 	if commander:
+		if (commander.global_position - global_position).length() > despawn_distance:
+			queue_free()
+			return
+		
 		var player_mult: float = 1.0
 		if Input.is_action_pressed("mouse_left"):
 			player_mult = 12.0

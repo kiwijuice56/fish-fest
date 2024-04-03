@@ -17,6 +17,9 @@ func _ready() -> void:
 	%VisionArea.body_exited.connect(_on_something_unseen)
 
 func _physics_process(delta: float) -> void:
+	if (Ref.player.global_position - global_position).length() > despawn_distance:
+		queue_free()
+	
 	var avg_vel: Vector2
 	for tentacle in %Tentacles.get_children():
 		avg_vel += tentacle.joints.get_child(0).linear_velocity
@@ -27,8 +30,7 @@ func _physics_process(delta: float) -> void:
 		velocity += (target.global_position - global_position).normalized() * 160
 	move_and_slide()
 	
-	if (Ref.player.global_position - global_position).length() > despawn_distance:
-		queue_free()
+	
 
 func _on_something_seen(body: PhysicsBody2D):
 	if body is BoidFish or body is PlayerFish:

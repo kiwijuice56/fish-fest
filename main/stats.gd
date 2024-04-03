@@ -15,5 +15,5 @@ var fish: int:
 		fish_changed.emit()
 
 func reset() -> void:
-	energy = 0
+	energy = 50
 	fish = 1

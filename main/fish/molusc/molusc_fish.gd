@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 			avg_position += fish.global_position
 		avg_position /= len(targets)
 		velocity += (avg_position - global_position) * 1.8 * delta
-		max_speed = lerp(max_speed, 200.0, delta * 2)
+		max_speed = lerp(max_speed, 180.0, delta * 2)
 	else:
 		max_speed = lerp(max_speed, 64.0, delta * 2)
 	if velocity.length() > max_speed:
@@ -79,4 +79,4 @@ func _on_kill_entered(body: PhysicsBody2D) -> void:
 			Stats.fish -= 1
 		elif body is PlayerFish:
 			Stats.fish -= 1
-			Ref.main.gameover.call_deferred()
+			Ref.main.player_death.call_deferred()

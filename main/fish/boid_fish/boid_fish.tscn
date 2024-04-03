@@ -48,15 +48,16 @@ _data = {
 "basic_swim": SubResource("Animation_o0m70")
 }
 
-[node name="BoidFish" instance=ExtResource("1_qb7eh")]
+[node name="BoidFish" groups=["children"] instance=ExtResource("1_qb7eh")]
 script = ExtResource("2_xpvhy")
 color_range = SubResource("GradientTexture1D_6ents")
-max_speed = 260.0
+max_speed = 240.0
 cohesion = 2.0
 separation = 4.0
 alignment = 0.5
 player_follow = 1.2
 player_alignment = 0.5
+despawn_distance = 2000.0
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_8yl7t")

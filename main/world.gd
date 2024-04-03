@@ -55,10 +55,10 @@ func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	add_child(new_chunk)
 	new_chunk.initialize()
 	
-	if chunk_pos.length() <= 3.0:
-		new_chunk.squiggler_chance = 0
+	var no_squiggler: bool = chunk_pos.length() <= 4.0
 	
-	if randf() < new_chunk.squiggler_chance and not is_instance_valid(current_squiggler):
+	print(is_instance_valid(current_squiggler))
+	if not no_squiggler and randf() < new_chunk.squiggler_chance and not is_instance_valid(current_squiggler):
 		current_squiggler = squiggler_scene.instantiate()
 		get_parent().add_child.call_deferred(current_squiggler)
 		current_squiggler.global_position = chunk_pos * Chunk.SIZE + Chunk.SIZE * 0.5

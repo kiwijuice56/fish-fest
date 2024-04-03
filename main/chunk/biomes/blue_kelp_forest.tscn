@@ -8,4 +8,4 @@
 script = ExtResource("2_yrfvx")
 muncher_scene = ExtResource("3_ku3yr")
 bg_color = Color(0.0588235, 0.0235294, 0.129412, 1)
-squiggler_chance = 0.3
+squiggler_chance = 0.1

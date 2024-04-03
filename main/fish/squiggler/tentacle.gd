@@ -25,16 +25,18 @@ func _physics_process(delta: float) -> void:
 		line.points[i + 1] = joints.get_child(i).position
 
 func _on_prey_entered(body: PhysicsBody2D):
+	if not is_instance_valid(body):
+		return
+	
 	var tip: RigidBody2D = joints.get_child(-1) 
 	if (body is BoidFish or body is PlayerFish) and not %AnimationPlayer.is_playing() and tip.linear_velocity.length() >= 512:
-		%AnimationPlayer.play("kill")
-		
 		if body is BoidFish:
 			Stats.fish -= 1
 			body.queue_free()
 		else:
 			Stats.fish -= 1
-			Ref.main.gameover.call_deferred()
+			Ref.main.player_death.call_deferred()
+		%AnimationPlayer.play("kill")
 
 func _on_prey_seen(body: PhysicsBody2D):
 	if body is PlayerFish or body is BoidFish:
