@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7f2rchw63djr"]
+
+[ext_resource type="Texture2D" uid="uid://bndiac0qub2s2" path="res://main/ui/prog_bot.png" id="1_mgnu6"]
+
+[node name="EggBig" type="Sprite2D"]
+position = Vector2(80, 105)
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("1_mgnu6")

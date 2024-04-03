@@ -57,7 +57,6 @@ func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	
 	var no_squiggler: bool = chunk_pos.length() <= 4.0
 	
-	print(is_instance_valid(current_squiggler))
 	if not no_squiggler and randf() < new_chunk.squiggler_chance and not is_instance_valid(current_squiggler):
 		current_squiggler = squiggler_scene.instantiate()
 		get_parent().add_child.call_deferred(current_squiggler)
