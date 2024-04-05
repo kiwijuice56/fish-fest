@@ -1,11 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6xq677b7i2yh"]
+[gd_scene load_steps=16 format=3 uid="uid://c6xq677b7i2yh"]
 
 [ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_jqmvt"]
 [ext_resource type="Script" path="res://main/fish/player_fish/player_fish.gd" id="2_yjn0a"]
 [ext_resource type="PackedScene" uid="uid://dpwashmtqkdqy" path="res://main/item/egg/egg.tscn" id="3_vtcec"]
 [ext_resource type="Texture2D" uid="uid://38tq7xk4ro3e" path="res://main/fish/fish.png" id="4_7xug7"]
 [ext_resource type="AudioStream" uid="uid://dv5j8lk243u6c" path="res://main/sounds/plop.ogg" id="4_gqouu"]
+[ext_resource type="Texture2D" uid="uid://uctxb8bg4ry5" path="res://main/item/algae/algae.png" id="4_l5sly"]
 [ext_resource type="AudioStream" uid="uid://obe0qgb7xids" path="res://main/sounds/wind.ogg" id="5_vm1et"]
+[ext_resource type="AudioStream" uid="uid://cemndijvuby1h" path="res://main/sounds/whooom.ogg" id="8_6omn0"]
+
+[sub_resource type="Curve" id="Curve_s4cs8"]
+_data = [Vector2(0, 0.0141094), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.517316, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_whj8k"]
+offsets = PackedFloat32Array(0, 0.497268, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.945355, 0.945355, 0.945355, 1, 0.992157, 0.992157, 0.992157, 0)
+
+[sub_resource type="Gradient" id="Gradient_imv8s"]
+offsets = PackedFloat32Array(0, 0.505464, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pdkuu"]
 random_pitch = 1.5
@@ -61,27 +75,53 @@ max_radius = 128.0
 [node name="Bubbles" parent="." index="0"]
 amount = 19
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Whistle" type="CPUParticles2D" parent="." index="1"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.768627)
+emitting = false
+amount = 16
+speed_scale = 1.5
+local_coords = true
+texture = ExtResource("4_l5sly")
+emission_shape = 2
+emission_sphere_radius = 76.0
+gravity = Vector2(0, 0)
+radial_accel_min = -128.0
+radial_accel_max = -128.0
+scale_amount_min = 0.3
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_s4cs8")
+color_ramp = SubResource("Gradient_whj8k")
+color_initial_ramp = SubResource("Gradient_imv8s")
+
+[node name="Sprite2D" parent="." index="2"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_7xug7")
 hframes = 5
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
+process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 16.0
 
-[node name="PlopPlayer" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="PlopPlayer" type="AudioStreamPlayer2D" parent="." index="7"]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_pdkuu")
 volume_db = 9.0
 
-[node name="WindPlayer" type="AudioStreamPlayer" parent="." index="7"]
+[node name="WindPlayer" type="AudioStreamPlayer" parent="." index="8"]
 unique_name_in_owner = true
 stream = ExtResource("5_vm1et")
 volume_db = -80.0
 autoplay = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+[node name="WhoomPlayer" type="AudioStreamPlayer" parent="." index="9"]
+unique_name_in_owner = true
+stream = ExtResource("8_6omn0")
+volume_db = -80.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_bdc8n")

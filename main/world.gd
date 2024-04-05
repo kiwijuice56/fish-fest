@@ -21,12 +21,15 @@ func _process(delta: float) -> void:
 	var new_player_chunk: Vector2 = (Ref.player.global_position / Chunk.SIZE).floor()
 	if new_player_chunk != player_chunk:
 		player_chunk = new_player_chunk
-		update_chunks()
+		update_chunks.call_deferred()
 
 func update_chunks() -> void:
 	var tween: Tween = get_tree().create_tween()
-	var last: Array = get_children()
-	var remain: Array = []
+	var last: Dictionary = {}
+	for child in get_children():
+		last[child] = true
+	
+	var remain: Dictionary = {}
 	for i in range(-1, 2):
 		for j in range(-1, 2):
 			var offset: Vector2 = Vector2(i, j)
@@ -35,7 +38,7 @@ func update_chunks() -> void:
 				chunk_storage[chunk_pos] = generate_chunk(chunk_pos)
 			elif not chunk_storage[chunk_pos] in last:
 				add_child(chunk_storage[chunk_pos])
-			remain.append(chunk_storage[chunk_pos])
+			remain[chunk_storage[chunk_pos]] = true
 	for child in get_children():
 		if not child in remain:
 			remove_child(child)
@@ -52,8 +55,8 @@ func generate_chunk(chunk_pos: Vector2) -> Chunk:
 	
 	var new_chunk: Chunk = chunk_scenes[i].instantiate()
 	new_chunk.global_position = Chunk.SIZE * chunk_pos
-	add_child(new_chunk)
-	new_chunk.initialize()
+	add_child.call_deferred(new_chunk)
+	new_chunk.initialize.call_deferred()
 	
 	var no_squiggler: bool = chunk_pos.length() <= 4.0
 	

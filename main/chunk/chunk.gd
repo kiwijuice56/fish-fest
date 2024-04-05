@@ -17,14 +17,15 @@ func _ready() -> void:
 
 func initialize() -> void:
 	%IDSprite.modulate = Color.from_hsv(randf(), 1.0, 1.0)
-	noise = FastNoiseLite.new()
-	generate_scene(debris_scene, 12, 22)
+	noise = Ref.noise.duplicate()
+	noise.offset = Vector3(randf(), randf(), randf()) * 1024
+	generate_scene(debris_scene, 6, 12)
 
 func generate_algae(min: int, max: int):
 	var count: int = randi() % (max - min) + min
 	for i in range(count):
 		var new_algae: Algae = algae_scene.instantiate()
-		add_child(new_algae)
+		add_child.call_deferred(new_algae)
 		new_algae.position = Vector2(randi() % int(Chunk.SIZE.x), randi() % int(Chunk.SIZE.y))
 
 func generate_scene(scene: PackedScene, min: int, max: int) -> void:
@@ -34,9 +35,9 @@ func generate_scene(scene: PackedScene, min: int, max: int) -> void:
 		if noise.get_noise_2d(coord.x, coord.y) > 0.5:
 			continue
 		var new_something = scene.instantiate()
-		add_child(new_something)
+		add_child.call_deferred(new_something)
 		if "initialize" in new_something:
-			new_something.initialize()
+			new_something.initialize.call_deferred()
 		new_something.position = coord * Chunk.SIZE
 
 func generate_scene_separate(scene: PackedScene, min: int, max: int) -> void:
@@ -46,5 +47,5 @@ func generate_scene_separate(scene: PackedScene, min: int, max: int) -> void:
 		var new_something = scene.instantiate()
 		get_tree().get_root().add_child.call_deferred(new_something)
 		if "initialize" in new_something:
-			new_something.initialize()
+			new_something.call_deferred.initialize()
 		new_something.global_position = global_position + coord * Chunk.SIZE

@@ -55,8 +55,8 @@ func set_shader_value(value: float):
 	%Boggle.material.set_shader_parameter("fV", min(1.0, value))
 
 func _on_energy_changed() -> void:
-	%EnergyLabel.text = str(int(Stats.energy / 50.0 * 100)) + "%"
-	var new_fv: float = Stats.energy / 50.0
+	%EnergyLabel.text = str(int(Stats.energy / 40.0 * 100)) + "%"
+	var new_fv: float = Stats.energy / 40.0
 	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_method(set_shader_value, %Boggle.material.get_shader_parameter("fV"), new_fv, 0.2)
 

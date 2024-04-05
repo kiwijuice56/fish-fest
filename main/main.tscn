@@ -23,7 +23,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y4jri"]
 shader = ExtResource("12_kclni")
-shader_parameter/alpha = 1.46
+shader_parameter/alpha = 1.9
 shader_parameter/inner_radius = 0.28
 shader_parameter/outer_radius = 3.175
 

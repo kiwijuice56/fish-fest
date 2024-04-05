@@ -14,6 +14,8 @@ func _input(event: InputEvent) -> void:
 		spawn_egg()
 	if event.is_action_pressed("ui_cancel"):
 		locked = not locked
+	if event.is_action_pressed("mouse_left", false) or event.is_action_released("mouse_left", false):
+		%Whistle.emitting = Input.is_action_pressed("mouse_left")
 
 func _physics_process(delta: float) -> void:
 	var dir: Vector2 = get_global_mouse_position() - global_position
@@ -25,6 +27,11 @@ func _physics_process(delta: float) -> void:
 	%Sprite2D.rotation = Vector2(1, 0).angle_to(dir)
 	%AnimationPlayer.speed_scale = speed / max_speed * 3.0
 	%WindPlayer.volume_db = -80 + speed / max_speed * 38
+	
+	if %Whistle.emitting:
+		%WhoomPlayer.volume_db = lerp(%WhoomPlayer.volume_db, -25.0, delta * 2)
+	else:
+		%WhoomPlayer.volume_db = lerp(%WhoomPlayer.volume_db, -80.0, delta * 2)
 	
 	if not locked:
 		move_and_slide()

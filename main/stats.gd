@@ -8,8 +8,8 @@ var first_game: bool = true
 var energy: int:
 	set(val):
 		energy = val
-		if energy >= 50:
-			energy -= 50
+		if energy >= 40:
+			energy -= 40
 			self.eggs += 1
 		energy_changed.emit()
 var fish: int:
