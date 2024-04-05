@@ -4,7 +4,7 @@ signal energy_changed
 signal fish_changed
 signal eggs_changed(old, new)
 
-var first_game: bool = true
+var first_game: bool = false
 var energy: int:
 	set(val):
 		energy = val

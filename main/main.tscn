@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=33 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
@@ -20,10 +20,13 @@
 [ext_resource type="Shader" path="res://main/ui/liquid.gdshader" id="13_ibh7c"]
 [ext_resource type="Shader" path="res://main/ui/inv.gdshader" id="14_kkfqs"]
 [ext_resource type="AudioStream" uid="uid://bbgpbbcqmc3g4" path="res://main/sounds/slosh.ogg" id="15_ynnpq"]
+[ext_resource type="Script" path="res://main/parallax.gd" id="21_qdm45"]
+[ext_resource type="PackedScene" uid="uid://23g7qwmpx5l" path="res://main/chunk/biomes/kelp2.tscn" id="22_o83yj"]
+[ext_resource type="Shader" path="res://main/ui/blur.gdshader" id="23_kd37h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y4jri"]
 shader = ExtResource("12_kclni")
-shader_parameter/alpha = 1.9
+shader_parameter/alpha = 2.3
 shader_parameter/inner_radius = 0.28
 shader_parameter/outer_radius = 3.175
 
@@ -249,6 +252,10 @@ _data = {
 "yeout": SubResource("Animation_bn0mx")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxutm"]
+shader = ExtResource("23_kd37h")
+shader_parameter/lod = 1.0
+
 [node name="Main" type="Node"]
 script = ExtResource("1_yo3c6")
 
@@ -268,7 +275,7 @@ color = Color(0, 0, 0, 1)
 [node name="World" type="Node" parent="."]
 script = ExtResource("3_a701s")
 chunk_scenes = Array[PackedScene]([ExtResource("4_fgrql"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo"), ExtResource("6_1fw3q"), ExtResource("3_1sm8v"), ExtResource("3_y1hmw")])
-chunk_prop = Array[float]([0.4, 0.51, 0.56, 0.6, 0.65])
+chunk_prop = Array[float]([0.43, 0.51, 0.56, 0.6, 0.65])
 squiggler_scene = ExtResource("4_0kga6")
 
 [node name="BoidFish" parent="." node_paths=PackedStringArray("commander") instance=ExtResource("10_8vs0t")]
@@ -522,3 +529,23 @@ script = ExtResource("10_588ha")
 process_mode = 3
 stream = ExtResource("11_5n2qw")
 volume_db = -20.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+script = ExtResource("21_qdm45")
+kelp_scene = ExtResource("22_o83yj")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+unique_name_in_owner = true
+modulate = Color(0.14902, 0.14902, 0.14902, 1)
+texture_repeat = 2
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(2048, 2048)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+material = SubResource("ShaderMaterial_mxutm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -9,4 +9,5 @@
 script = ExtResource("2_ef7cj")
 muncher_scene = ExtResource("3_efye0")
 bg_color = Color(0.0588235, 0.0235294, 0.0588235, 1)
+p_color = Color(0.321569, 0.0862745, 0.0862745, 1)
 kelp_scene = ExtResource("3_qios8")

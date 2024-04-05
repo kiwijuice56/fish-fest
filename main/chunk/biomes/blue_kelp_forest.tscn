@@ -7,5 +7,6 @@
 [node name="BuleKelpForest" instance=ExtResource("1_bfxvr")]
 script = ExtResource("2_yrfvx")
 muncher_scene = ExtResource("3_ku3yr")
-bg_color = Color(0.0588235, 0.0235294, 0.129412, 1)
+bg_color = Color(0, 0.0156863, 0.0627451, 1)
+p_color = Color(0.180392, 0.180392, 0.231373, 1)
 squiggler_chance = 0.1

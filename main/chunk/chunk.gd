@@ -2,6 +2,7 @@ class_name Chunk
 extends Node2D
 
 @export var bg_color: Color
+@export var p_color: Color
 @export var algae_scene: PackedScene
 @export var kelp_scene: PackedScene
 @export var debris_scene: PackedScene
@@ -22,7 +23,7 @@ func initialize() -> void:
 	generate_scene(debris_scene, 6, 12)
 
 func generate_algae(min: int, max: int):
-	var count: int = randi() % (max - min) + min
+	var count: int = int((randi() % (max - min) + min) * 0.8)
 	for i in range(count):
 		var new_algae: Algae = algae_scene.instantiate()
 		add_child.call_deferred(new_algae)
