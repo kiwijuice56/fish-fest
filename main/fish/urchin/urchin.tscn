@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://ut03m3iou2fy"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_qji5k"]
+[ext_resource type="Script" path="res://main/fish/urchin/urchin.gd" id="2_svkrw"]
+[ext_resource type="PackedScene" uid="uid://5htxyuov5h6v" path="res://main/fish/urchin/spike.tscn" id="3_xce6v"]
+[ext_resource type="Texture2D" uid="uid://fnotnhglwsik" path="res://main/fish/urchin/urchin.png" id="4_0jam0"]
+
+[sub_resource type="Animation" id="Animation_n4awe"]
+resource_name = "haiii"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 12.5664]
+}
+
+[sub_resource type="Animation" id="Animation_v0jiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8tqqm"]
+_data = {
+"RESET": SubResource("Animation_v0jiw"),
+"haiii": SubResource("Animation_n4awe")
+}
+
+[node name="Urchin" instance=ExtResource("1_qji5k")]
+script = ExtResource("2_svkrw")
+max_speed = 8.0
+spike = ExtResource("3_xce6v")
+tendrils = 8
+despawn_range = 1400.0
+
+[node name="Bubbles" parent="." index="0"]
+amount = 6
+emission_sphere_radius = 4.0
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("4_0jam0")
+offset = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = null
+
+[node name="Tentacles" type="Node2D" parent="." index="3"]
+unique_name_in_owner = true
+
+[node name="VisionArea" parent="." index="4"]
+visible = true
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+shape = null
+
+[node name="CollectionArea" parent="." index="5"]
+visible = false
+position = Vector2(24, 1)
+
+[node name="CollisionShape2D" parent="CollectionArea" index="0"]
+shape = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_8tqqm")
+}
+autoplay = "haiii"

@@ -1,0 +1,199 @@
+[gd_scene load_steps=18 format=3 uid="uid://cvj8ioay315m8"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_yx3mb"]
+[ext_resource type="Script" path="res://main/fish/jellyfish/jellyfish.gd" id="2_hgmku"]
+[ext_resource type="Texture2D" uid="uid://3us4jtqmm4hx" path="res://main/chunk/biomes/kelp.png" id="3_7bs1j"]
+[ext_resource type="PackedScene" uid="uid://b4mqh1rhns71h" path="res://main/fish/blood_sound.tscn" id="4_w3sc8"]
+[ext_resource type="PackedScene" uid="uid://thiyub43pqal" path="res://main/fish/squiggler/tentacle.tscn" id="4_xuwjs"]
+[ext_resource type="PackedScene" uid="uid://smgd5yjw6rht" path="res://main/fish/blood.tscn" id="5_bppc5"]
+[ext_resource type="AudioStream" uid="uid://ory3yal307nb" path="res://main/sounds/crab.ogg" id="6_n43lm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sop68"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7tgo"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpiab"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fo7k"]
+
+[sub_resource type="Animation" id="Animation_bpi4p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_t562k"]
+resource_name = "fwoom"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7odx"]
+_data = {
+"RESET": SubResource("Animation_bpi4p"),
+"fwoom": SubResource("Animation_t562k")
+}
+
+[sub_resource type="Animation" id="Animation_m6uim"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillArea/Blood:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KillArea/BloodSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7emdi"]
+resource_name = "kill"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillArea/Blood:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KillArea/BloodSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ru8ax"]
+_data = {
+"RESET": SubResource("Animation_m6uim"),
+"kill": SubResource("Animation_7emdi")
+}
+
+[node name="Jellyfish" instance=ExtResource("1_yx3mb")]
+script = ExtResource("2_hgmku")
+max_speed = 32.0
+despawn_range = 1400.0
+
+[node name="Bubbles" parent="." index="0"]
+amount = 16
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_7bs1j")
+offset = Vector2(0, 11.455)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_sop68")
+
+[node name="Tentacles" type="Node2D" parent="." index="3"]
+
+[node name="Tentacle" parent="Tentacles" index="0" instance=ExtResource("4_xuwjs")]
+position = Vector2(-1, 0)
+scale = Vector2(0.3, 0.3)
+hostile = false
+
+[node name="Tentacle2" parent="Tentacles" index="1" instance=ExtResource("4_xuwjs")]
+position = Vector2(-1, 0)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+hostile = false
+
+[node name="VisionArea" parent="." index="4"]
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+shape = SubResource("CircleShape2D_h7tgo")
+
+[node name="CollectionArea" parent="." index="5"]
+visible = false
+position = Vector2(24, 1)
+
+[node name="CollisionShape2D" parent="CollectionArea" index="0"]
+shape = SubResource("CircleShape2D_lpiab")
+
+[node name="KillArea" type="Area2D" parent="." index="6"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(15, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="BloodSound" parent="KillArea" index="0" instance=ExtResource("4_w3sc8")]
+
+[node name="Blood" parent="KillArea" index="1" instance=ExtResource("5_bppc5")]
+position = Vector2(-28, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea" index="2"]
+shape = SubResource("CircleShape2D_0fo7k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_g7odx")
+}
+autoplay = "fwoom"
+speed_scale = 5.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="8"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ru8ax")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("6_n43lm")
+volume_db = -22.0
+pitch_scale = 0.7
+autoplay = true
+max_distance = 500.0
+attenuation = 2.14355

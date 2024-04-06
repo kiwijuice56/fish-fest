@@ -317,6 +317,7 @@ position = Vector2(75, 26)
 
 [node name="Clam" parent="." instance=ExtResource("13_jqcs3")]
 position = Vector2(-143, 250)
+despawn_range = 1400.0
 
 [node name="Slug" parent="." instance=ExtResource("14_3g0lo")]
 position = Vector2(57, 105)

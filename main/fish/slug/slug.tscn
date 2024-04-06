@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://def66x4s6rrby"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_q5vfo"]
+[ext_resource type="Script" path="res://main/fish/slug/slug.gd" id="2_dwfc1"]
+[ext_resource type="Texture2D" uid="uid://bfj0pqg5741ay" path="res://main/fish/slug/glorble.png" id="4_ewwpo"]
+
+[sub_resource type="Animation" id="Animation_4gex1"]
+resource_name = "aggaga"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_qvt63"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tfltf"]
+_data = {
+"RESET": SubResource("Animation_qvt63"),
+"aggaga": SubResource("Animation_4gex1")
+}
+
+[node name="Slug" instance=ExtResource("1_q5vfo")]
+script = ExtResource("2_dwfc1")
+max_speed = 16.0
+despawn_range = 1400.0
+
+[node name="Bubbles" parent="." index="0"]
+position = Vector2(-5, 0)
+amount = 5
+emission_sphere_radius = 4.0
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("4_ewwpo")
+offset = Vector2(0, 0)
+hframes = 3
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = null
+
+[node name="Tentacles" type="Node2D" parent="." index="3"]
+unique_name_in_owner = true
+
+[node name="VisionArea" parent="." index="4"]
+visible = true
+collision_mask = 3
+
+[node name="CollisionShape2D" parent="VisionArea" index="0"]
+shape = null
+
+[node name="CollectionArea" parent="." index="5"]
+visible = false
+position = Vector2(24, 1)
+
+[node name="CollisionShape2D" parent="CollectionArea" index="0"]
+shape = null
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="6"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_tfltf")
+}
+autoplay = "aggaga"
+speed_scale = 3.0

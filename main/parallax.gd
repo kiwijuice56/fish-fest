@@ -16,5 +16,4 @@ func _ready() -> void:
 		%ParallaxLayer.add_child(new_kelp)
 		new_kelp.initialize()
 		new_kelp.scale *= 0.5
-		new_kelp.get_child(1).disabled = true
 		new_kelp.position = pos
