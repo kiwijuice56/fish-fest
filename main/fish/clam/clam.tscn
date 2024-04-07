@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://main/fish/clam/clam.gd" id="2_kx4m3"]
 [ext_resource type="PackedScene" uid="uid://thiyub43pqal" path="res://main/fish/squiggler/tentacle.tscn" id="3_yl0xw"]
 [ext_resource type="Texture2D" uid="uid://b3bep6d6hspi5" path="res://main/fish/clam/clam.png" id="4_niubm"]
-[ext_resource type="AudioStream" uid="uid://b1hbrcgu3yh6q" path="res://main/sounds/badump.ogg" id="7_agmlm"]
+[ext_resource type="AudioStream" uid="uid://r6ne27stdmv1" path="res://main/fish/clam/clam.ogg" id="5_gigtb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mras0"]
 radius = 29.0
@@ -99,8 +99,8 @@ shape = SubResource("CircleShape2D_oo4rb")
 visible = false
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." index="6"]
-stream = ExtResource("7_agmlm")
-volume_db = -8.0
+stream = ExtResource("5_gigtb")
+volume_db = -19.0
 autoplay = true
 max_distance = 800.0
 attenuation = 2.07053

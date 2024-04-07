@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2klanuia8oej"]
+[gd_scene load_steps=4 format=3 uid="uid://d2klanuia8oej"]
 
 [ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="1_pq5g4"]
 [ext_resource type="Script" path="res://main/chunk/biomes/kelp_forest.gd" id="2_ef8h7"]
+[ext_resource type="PackedScene" uid="uid://lljwrf7yj5fc" path="res://main/fish/clam/clam.tscn" id="3_176qo"]
 
 [node name="KelpForest" instance=ExtResource("1_pq5g4")]
 script = ExtResource("2_ef8h7")
+muncher_scene = ExtResource("3_176qo")
 bg_color = Color(0, 0.0431373, 0.0588235, 1)
 p_color = Color(0.180392, 0.180392, 0.180392, 1)

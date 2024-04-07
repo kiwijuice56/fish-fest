@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5h6yedbwtqx6"]
+[gd_scene load_steps=6 format=3 uid="uid://b5h6yedbwtqx6"]
 
 [ext_resource type="PackedScene" uid="uid://bausrg701dtih" path="res://main/chunk/chunk.tscn" id="1_3qn7a"]
 [ext_resource type="Script" path="res://main/chunk/biomes/red_kelp_forest.gd" id="2_n3d1n"]
 [ext_resource type="PackedScene" uid="uid://cvj8ioay315m8" path="res://main/fish/jellyfish/jellyfish.tscn" id="3_4fibr"]
 [ext_resource type="PackedScene" uid="uid://blu3lnxnc6d2j" path="res://main/chunk/biomes/red_kelp.tscn" id="4_2ij2o"]
+[ext_resource type="PackedScene" uid="uid://def66x4s6rrby" path="res://main/fish/slug/slug.tscn" id="4_i8i5t"]
 
 [node name="BrownKelpForest" instance=ExtResource("1_3qn7a")]
 script = ExtResource("2_n3d1n")
 muncher_scene = ExtResource("3_4fibr")
+muncher_scene2 = ExtResource("4_i8i5t")
 bg_color = Color(0.0784314, 0.0156863, 0.0117647, 1)
 p_color = Color(0.321569, 0.14902, 0.0862745, 1)
 kelp_scene = ExtResource("4_2ij2o")

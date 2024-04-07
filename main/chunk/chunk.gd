@@ -20,10 +20,10 @@ func initialize() -> void:
 	%IDSprite.modulate = Color.from_hsv(randf(), 1.0, 1.0)
 	noise = Ref.noise.duplicate()
 	noise.offset = Vector3(randf(), randf(), randf()) * 1024
-	generate_scene(debris_scene, 6, 12)
+	generate_scene(debris_scene, 4, 8)
 
 func generate_algae(min: int, max: int):
-	var count: int = int((randi() % (max - min) + min) * 0.8)
+	var count: int = int((randi() % (max - min) + min) * 0.65)
 	for i in range(count):
 		var new_algae: Algae = algae_scene.instantiate()
 		add_child.call_deferred(new_algae)

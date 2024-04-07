@@ -7,7 +7,7 @@ extends ParallaxBackground
 func _ready() -> void:
 	var noise: FastNoiseLite = FastNoiseLite.new()
 	
-	for i in range(48):
+	for i in range(32):
 		var pos: Vector2 = Vector2(randf(), randf()) * 1600 + Vector2(200, 200)
 		if noise.get_noise_2dv(pos) > 0.5:
 			continue

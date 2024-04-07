@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dk2jougfjef45"]
+[gd_scene load_steps=35 format=3 uid="uid://dk2jougfjef45"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq677b7i2yh" path="res://main/fish/player_fish/player_fish.tscn" id="1_oks1y"]
 [ext_resource type="Script" path="res://main/main.gd" id="1_yo3c6"]
@@ -16,11 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://cjtd6lb6vq13y" path="res://main/fish/boid_fish/boid_fish.tscn" id="10_8vs0t"]
 [ext_resource type="Script" path="res://main/game_over.gd" id="10_588ha"]
 [ext_resource type="AudioStream" uid="uid://b64cy0li4vloe" path="res://main/sounds/death.ogg" id="11_5n2qw"]
-[ext_resource type="PackedScene" uid="uid://ut03m3iou2fy" path="res://main/fish/urchin/urchin.tscn" id="12_6gdgo"]
 [ext_resource type="Shader" path="res://main/ui/vignette.gdshader" id="12_kclni"]
 [ext_resource type="Shader" path="res://main/ui/liquid.gdshader" id="13_ibh7c"]
-[ext_resource type="PackedScene" uid="uid://lljwrf7yj5fc" path="res://main/fish/clam/clam.tscn" id="13_jqcs3"]
-[ext_resource type="PackedScene" uid="uid://def66x4s6rrby" path="res://main/fish/slug/slug.tscn" id="14_3g0lo"]
 [ext_resource type="Shader" path="res://main/ui/inv.gdshader" id="14_kkfqs"]
 [ext_resource type="AudioStream" uid="uid://bbgpbbcqmc3g4" path="res://main/sounds/slosh.ogg" id="15_ynnpq"]
 [ext_resource type="Script" path="res://main/parallax.gd" id="21_qdm45"]
@@ -294,7 +291,7 @@ color = Color(0, 0, 0, 1)
 [node name="World" type="Node" parent="."]
 script = ExtResource("3_a701s")
 chunk_scenes = Array[PackedScene]([ExtResource("4_fgrql"), ExtResource("2_4xr5t"), ExtResource("5_o3iuo"), ExtResource("6_1fw3q"), ExtResource("3_1sm8v"), ExtResource("3_y1hmw")])
-chunk_prop = Array[float]([0.43, 0.51, 0.56, 0.6, 0.65])
+chunk_prop = Array[float]([0.55, 0.6, 0.63, 0.66, 0.69])
 squiggler_scene = ExtResource("4_0kga6")
 
 [node name="BoidFish" parent="." node_paths=PackedStringArray("commander") instance=ExtResource("10_8vs0t")]
@@ -302,33 +299,6 @@ position = Vector2(-50, -65)
 commander = NodePath("../PlayerFish")
 
 [node name="PlayerFish" parent="." instance=ExtResource("1_oks1y")]
-
-[node name="Urchin" parent="." instance=ExtResource("12_6gdgo")]
-position = Vector2(51, 93)
-
-[node name="Urchin2" parent="." instance=ExtResource("12_6gdgo")]
-position = Vector2(-19, 93)
-
-[node name="Urchin3" parent="." instance=ExtResource("12_6gdgo")]
-position = Vector2(-6, 123)
-
-[node name="Urchin4" parent="." instance=ExtResource("12_6gdgo")]
-position = Vector2(75, 26)
-
-[node name="Clam" parent="." instance=ExtResource("13_jqcs3")]
-position = Vector2(-143, 250)
-
-[node name="Slug" parent="." instance=ExtResource("14_3g0lo")]
-position = Vector2(57, 105)
-
-[node name="Slug2" parent="." instance=ExtResource("14_3g0lo")]
-position = Vector2(92, 65)
-
-[node name="Slug3" parent="." instance=ExtResource("14_3g0lo")]
-position = Vector2(-41, 38)
-
-[node name="Slug4" parent="." instance=ExtResource("14_3g0lo")]
-position = Vector2(34, -52)
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -551,16 +521,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -270.0
+offset_left = -248.415
 offset_top = -60.0
-offset_right = 270.0
+offset_right = 248.415
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_a1erm")
 theme_override_font_sizes/normal_font_size = 90
 bbcode_enabled = true
-text = "[shake rate=30.0 level=8 connected=1]quiverfish[/shake]"
+text = "[shake rate=30.0 level=8 connected=1]void fish[/shake]"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ckp15")

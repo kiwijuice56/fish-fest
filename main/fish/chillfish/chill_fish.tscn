@@ -1,0 +1,246 @@
+[gd_scene load_steps=16 format=3 uid="uid://b18yb62erk14c"]
+
+[ext_resource type="PackedScene" uid="uid://dyych6mhtvl5" path="res://main/fish/fish.tscn" id="1_8qr1k"]
+[ext_resource type="Script" path="res://main/fish/molusc/molusc_fish.gd" id="2_h1hp8"]
+[ext_resource type="Texture2D" uid="uid://bccsoojkmnq2g" path="res://main/fish/chillfish/segment.png" id="3_57hb0"]
+[ext_resource type="Texture2D" uid="uid://kf5limxj0lmy" path="res://main/fish/chillfish/segment2.png" id="3_jfroq"]
+[ext_resource type="Texture2D" uid="uid://cchb8okmvb8pw" path="res://main/fish/bubble.png" id="4_hsbq5"]
+[ext_resource type="Texture2D" uid="uid://b7irujqcakp5n" path="res://main/fish/chillfish/shine.png" id="6_u8ix1"]
+
+[sub_resource type="Curve" id="Curve_ogqke"]
+_data = [Vector2(0.0169231, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qdvm"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_ptrth"]
+resource_name = "woawo"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 12.5664]
+}
+
+[sub_resource type="Animation" id="Animation_gsftn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qi05r"]
+_data = {
+"RESET": SubResource("Animation_gsftn"),
+"woawo": SubResource("Animation_ptrth")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5nvya"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_5v1np"]
+resource_name = "woohoo"
+length = 1.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_xo8ag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s27yd"]
+_data = {
+"RESET": SubResource("Animation_xo8ag"),
+"woohoo": SubResource("Animation_5v1np")
+}
+
+[node name="ChillFish" instance=ExtResource("1_8qr1k")]
+collision_layer = 34
+collision_mask = 33
+script = ExtResource("2_h1hp8")
+max_speed = 150.0
+cohesion = 1.0
+alignment = 1.0
+separation = 1.0
+despawn_range = 1600.0
+rot = 4.0
+chase = 1.8
+
+[node name="Bubbles" parent="." index="0"]
+amount = 12
+emission_sphere_radius = 16.0
+
+[node name="Segment3" type="RigidBody2D" parent="." index="1"]
+position = Vector2(-88, 0)
+collision_layer = 32
+collision_mask = 33
+gravity_scale = 0.0
+
+[node name="Bubbles4" type="CPUParticles2D" parent="Segment3" index="0"]
+unique_name_in_owner = true
+texture = ExtResource("4_hsbq5")
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment3" index="1"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_57hb0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment3" index="2"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_4qdvm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Segment3" index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_qi05r")
+}
+autoplay = "woawo"
+speed_scale = 0.3
+
+[node name="Segment2" type="RigidBody2D" parent="." index="2"]
+position = Vector2(-65, 0)
+collision_layer = 32
+collision_mask = 33
+gravity_scale = 0.0
+
+[node name="Bubbles3" type="CPUParticles2D" parent="Segment2" index="0"]
+unique_name_in_owner = true
+texture = ExtResource("4_hsbq5")
+emission_shape = 1
+emission_sphere_radius = 12.0
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment2" index="1"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_57hb0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment2" index="2"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_4qdvm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Segment2" index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_qi05r")
+}
+autoplay = "woawo"
+speed_scale = 0.3
+
+[node name="Segment" type="RigidBody2D" parent="." index="3"]
+position = Vector2(-36, 1)
+collision_layer = 32
+collision_mask = 33
+gravity_scale = 0.0
+
+[node name="Bubbles2" type="CPUParticles2D" parent="Segment" index="0"]
+unique_name_in_owner = true
+amount = 12
+texture = ExtResource("4_hsbq5")
+emission_shape = 1
+emission_sphere_radius = 12.0
+gravity = Vector2(0, -32)
+scale_amount_min = 0.2
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_ogqke")
+
+[node name="Sprite2D" type="Sprite2D" parent="Segment" index="1"]
+position = Vector2(1, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_57hb0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Segment" index="2"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_4qdvm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Segment" index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_qi05r")
+}
+autoplay = "woawo"
+speed_scale = 0.3
+
+[node name="Sprite2D" parent="." index="4"]
+texture = ExtResource("3_jfroq")
+offset = Vector2(0, 0)
+hframes = 5
+
+[node name="CollisionShape2D" parent="." index="5"]
+shape = SubResource("CircleShape2D_5nvya")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." index="8"]
+node_a = NodePath("..")
+node_b = NodePath("../Segment")
+disable_collision = false
+motor_enabled = true
+motor_target_velocity = 7.67945
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="." index="9"]
+position = Vector2(-35, 0)
+node_a = NodePath("../Segment")
+node_b = NodePath("../Segment2")
+disable_collision = false
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="." index="10"]
+position = Vector2(-64, 0)
+node_a = NodePath("../Segment2")
+node_b = NodePath("../Segment3")
+disable_collision = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_s27yd")
+}
+autoplay = "woohoo"
+
+[node name="KillArea" type="Area2D" parent="." index="12"]
+unique_name_in_owner = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="13"]
+visible = false
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_u8ix1")

@@ -7,4 +7,4 @@
 script = ExtResource("2_u8lpd")
 bg_color = Color(0, 0.0156863, 0.0588235, 1)
 p_color = Color(0.180392, 0.180392, 0.180392, 1)
-squiggler_chance = 0.3
+squiggler_chance = 0.1
